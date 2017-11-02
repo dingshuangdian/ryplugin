@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+    <style name="WinDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+    <!-- -->
+    <style name="ActionBarSettingImg">
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ActionBarSettingTextView">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/group_list_black_textview</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <!-- 下划线-->
+    <style name="PublicLineView">
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:background">@color/group_list_gray</item>
+    </style>
+
+    <!--主页面ui下划线-->
+    <style name="DemoMainPublic">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">4dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:background">@color/de_title_bg</item>
+    </style>
+
+    <style name="DemoMainNewMassage1">
+        <item name="android:background">@drawable/rc_unread_count_bg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/tab_indicator_text</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_width">6dp</item>
+        <item name="android:layout_height">6dp</item>
+        <!-- <item name="android:visibility">gone</item>-->
+    </style>
+    <style name="DemoMainNewMassage">
+        <item name="android:background">@drawable/rc_unread_count_bg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/tab_indicator_text</item>
+        <item name="android:textSize">9sp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_width">18dp</item>
+        <item name="android:layout_height">18dp</item>
+       <!-- <item name="android:visibility">gone</item>-->
+    </style>
+    <style name="DemoAddressNewMassage">
+        <item name="android:background">@drawable/rc_unread_count_bg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/tab_indicator_text</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
+        <!-- <item name="android:visibility">gone</item>-->
+    </style>
+
+    <!-- big black-->
+    <style name="DemoTextStyleBig1">
+        <item name="android:textSize">18sp</item>
+    </style>
+    <!-- big black-->
+    <style name="DemoTextStyleBigBlack">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/group_list_black_textview</item>
+    </style>
+    <!-- small gray-->
+    <style name="DemoTextStyleSmall">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/group_list_gray</item>
+    </style>
+
+    <!-- middle gray-->
+    <style name="DemoTextStyleMiddle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/group_list_gray</item>
+    </style>
+
+
+
+
+    <style name="MyCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+
+        <item name="android:button">@drawable/de_pic_checkbox</item>
+
+    </style>
+
+    <style name="PicCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+
+        <item name="android:button">@drawable/de_pic_chebox_photo</item>
+
+        <item name="android:paddingLeft">2.0dip</item>
+
+        <item name="android:maxHeight">10.0dip</item>
+
+    </style>
+
+    <style name="dialogFullscreen">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+  <style name="SwitchButtonMD">
+    <item name="kswThumbDrawable">@drawable/ksw_md_thumb</item>
+    <item name="kswBackColor">@color/ksw_md_back_color</item>
+    <item name="kswBackMeasureRatio">1.45</item>
+    <item name="kswThumbMarginLeft">-16dp</item>
+    <item name="kswThumbMarginTop">-14dp</item>
+    <item name="kswThumbMarginRight">-16dp</item>
+    <item name="kswThumbMarginBottom">-14dp</item>
+    <item name="kswThumbWidth">@dimen/ksw_md_thumb_ripple_size</item>
+    <item name="kswThumbHeight">@dimen/ksw_md_thumb_ripple_size</item>
+  </style>
+
+  <style name="SwitchButtonStyle">
+    <item name="android:paddingLeft">15dp</item>
+    <item name="android:paddingRight">15dp</item>
+    <item name="android:paddingTop">4dp</item>
+    <item name="android:paddingBottom">4dp</item>
+  </style>
+  <!--red-->
+  <style name="text_black_16">
+    <item name="android:textColor">@color/black</item>
+    <item name="android:textSize">16sp</item>
+  </style>
+  <style name="text_black_28">
+    <item name="android:textColor">@color/black</item>
+    <item name="android:textSize">28sp</item>
+  </style>
+  <style name="text_white_16">
+    <item name="android:textColor">@color/white</item>
+    <item name="android:textSize">16dip</item>
+  </style>
+  <!--FragmentDialog-->
+  <style name="DialogTheme" parent="android:Theme.Dialog">
+    <item name="android:windowBackground">@drawable/dialog_background</item>
+    <item name="android:windowNoTitle">true</item>
+  </style>
+  <style name="text_gray_16">
+    <item name="android:textColor">@color/gray</item>
+    <item name="android:textSize">16dip</item>
+  </style>
+
+  <style name="text_gray_12">
+    <item name="android:textColor">@color/gray</item>
+    <item name="android:textSize">12dip</item>
+  </style>
+  <style name="radioButton">
+    <item name="android:background">@drawable/selector_checkbox_green</item>
+    <item name="android:button">@null</item>
+  </style>
+  <style name="line_vertical" parent="line">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">1dp</item>
+  </style>
+  <style name="line">
+    <item name="android:background">@color/bg_color</item>
+  </style>
+  <style name="DialogStyle" parent="@android:style/Theme.Dialog">
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:windowFrame">@null</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowIsFloating">true</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowFullscreen">true</item>
+    <item name="android:backgroundDimEnabled">true</item>
+  </style>
+
+  <!--CircleImageView属性-->
+  <declare-styleable name="Ry_CircleImageView">
+    <attr name="ry_civ_border_width" format="dimension" />
+    <attr name="ry_civ_border_color" format="color" />
+    <attr name="ry_civ_border_overlay" format="boolean" />
+    <attr name="ry_civ_fill_color" format="color" />
+  </declare-styleable>
+</resources>

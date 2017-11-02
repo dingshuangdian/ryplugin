@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="waiting">请稍等...</string>
+  <!--红包显示-->
+  <string name="no_rp">手慢了, 红包派完了</string>
+  <string name="rp_expire">该红包已超过24小时。如已领取,可在"我的红包"中查看</string>
+  <string name="rp_send">您发了一个红包</string>
+  <string name="group_number">本群共%1$d人</string>
+  <string name="to_buttom">到底了噢～</string>
+  <string name="loading">加载中...</string>
+  <!--拆红包原生-->
+
+  <string name="other_rp_has_left">已领取%1$d/%2$d</string>
+  <string name="other_rp_no_left">已领取%1$d/%2$d，已被领完</string>
+  <string name="self_rp_has_left">已领取%1$d/%2$d，共%3$s/%4$s元</string>
+  <string name="self_rp_no_left">已领取%1$d/%2$d,共%3$s元,已被领完</string>
+  <string name="all_group_member">全部群成员</string>
+  <string name="group_member_size">全部群成员</string>
+
+  <string name="group_announcement">群公告</string>
+  <string name="group_info">群组信息</string>
+  <string name="empty_group_notice">请编辑群公告</string>
+  <string name="Done">完成</string>
+  <string name="confirm">确认</string>
+  <string name="cancel">取消</string>
+  <string name="group_notice_exist_confirm">退出本次编辑</string>
+  <string name="group_notice_post_confirm">该公告会通知全部群成员，是否发布？</string>
+  <string name="group_notice_prefix">\@所有人\n</string>
+
+</resources>

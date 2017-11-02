@@ -1,0 +1,419 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-ismartnet-rongcloud" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+	<name>RongCloudNav</name>
+
+	<js-module name="RongCloudNav" src="www/RongCloudNav.js">
+		<clobbers target="RongCloud" />
+	</js-module>
+	<platform name="android">
+		<config-file parent="/*" target="res/xml/config.xml">
+			<feature name="RongCloudNav">
+				<param name="android-package" value="cordova.plugin.ismartnet.rongcloud.RongCloudNav" />
+			</feature>
+		</config-file>
+		<config-file parent="/*" target="AndroidManifest.xml">
+			<!--权限配置-->
+			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+			<uses-permission android:name="android.permission.INTERNET" />
+			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+			<!-- 获取机型信息权限 -->
+			<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+			<uses-permission android:name="android.permission.GET_TASKS" />
+			<uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+			<!-- 查看 Wi-Fi 状态 -->
+			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+			<!-- 查看网络状态 -->
+			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+			<uses-permission android:name="android.permission.CAMERA" />
+			<!-- 录音 -->
+			<uses-permission android:name="android.permission.RECORD_AUDIO" />
+			<!-- 控制振动器 -->
+			<uses-permission android:name="android.permission.VIBRATE" />
+			<!-- 防止设备休眠 -->
+			<uses-permission android:name="android.permission.WAKE_LOCK" />
+			<uses-permission android:name="android.permission.WRITE_SETTINGS" />
+			<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+			<uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+			<!-- 获取联系人信息，demo中演示发送通讯录消息 -->
+			<uses-permission android:name="android.permission.READ_CONTACTS" />
+			<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+			<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+			<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+			<supports-screens
+			android:anyDensity="true"
+			android:largeScreens="true"
+			android:normalScreens="true"
+			android:resizeable="true"
+			android:smallScreens="true"
+			android:xlargeScreens="true">
+			</supports-screens>
+
+		</config-file>
+		<!--activity跳转-->
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+
+			<activity
+      android:name="cordova.plugin.ismartnet.rongcloud.activity.ConversationActivity"
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="stateHidden|adjustResize">
+				<intent-filter>
+					<action android:name="android.intent.action.VIEW" />
+					<category android:name="android.intent.category.DEFAULT" />
+					<data
+          android:host="$PACKAGE_NAME"
+          android:pathPrefix="/conversation/"
+          android:scheme="rong" />
+				</intent-filter>
+			</activity>
+			
+			  <receiver
+      android:name="cordova.plugin.ismartnet.rongcloud.receiver.SealNotificationReceiver"
+      android:exported="true">
+      <intent-filter>
+        <action android:name="io.rong.push.intent.MESSAGE_ARRIVED" />
+        <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED" />
+        <action android:name="io.rong.push.intent.MESSAGE_CLICKED" />
+        <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED" />
+      </intent-filter>
+    </receiver>
+			<!-- 高德地图 -->
+			<meta-data
+      android:name="com.amap.api.v2.apikey"
+      android:value="e09af6a2b26c02086e9216bd07c960ae" />
+			<provider
+      android:name="android.support.v4.content.FileProvider"
+      android:authorities="$PACKAGE_NAME.FileProvider"
+      android:exported="false"
+      android:grantUriPermissions="true">
+				<meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/rc_file_path" />
+			</provider>
+			<!--发红包界面-->
+			<activity android:name="cordova.plugin.ismartnet.rongcloud.activity.SendGroupEnvelopesActivityRp"></activity>
+
+			<activity android:name="cordova.plugin.ismartnet.rongcloud.activity.RpDetailActivityRp"></activity>
+			<activity
+      android:name="cordova.plugin.ismartnet.rongcloud.activity.GroupDetailActivity"
+      android:screenOrientation="portrait" />
+			<activity
+      android:name="cordova.plugin.ismartnet.rongcloud.activity.GroupNoticeActivity"
+      android:screenOrientation="portrait" />
+		</config-file>
+		<!--java-->
+		<!--activity-->
+		<source-file src="src/android/java/activity/ConversationActivity.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/activity" />
+	
+		
+		<source-file src="src/android/java/activity/RpDetailActivityRp.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/activity" />
+		<source-file src="src/android/java/activity/SendGroupEnvelopesActivityRp.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/activity" />
+		
+		<source-file src="src/android/java/activity/GroupDetailActivity.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/activity" />
+		<source-file src="src/android/java/activity/GroupNoticeActivity.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/activity" />
+
+
+		<!--adapter-->
+		<source-file src="src/android/java/adapter/cAdapter.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/adapter" />
+		
+		<source-file src="src/android/java/adapter/DetailBaseAdapter.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/adapter" />
+		<source-file src="src/android/java/adapter/GridAdapter.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/adapter" />
+
+		<!--base-->
+		<source-file src="src/android/java/base/BaseActivity.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/base" />
+		<source-file src="src/android/java/base/RpBaseActivity.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/base" />
+		<source-file src="src/android/java/base/RpBaseSendActivity.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/base" />
+
+		<!--bean-->
+		<source-file src="src/android/java/bean/User.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/bean" />
+		<source-file src="src/android/java/bean/UserInfoBean.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/bean" />
+		<source-file src="src/android/java/bean/Group.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/bean" />
+		<source-file src="src/android/java/bean/Receive.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/bean" />
+		<source-file src="src/android/java/bean/Order.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/bean" />
+		<source-file src="src/android/java/bean/SendUser.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/bean" />
+		<source-file src="src/android/java/bean/CurrentUser.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/bean" />
+		<source-file src="src/android/java/bean/GroupMsg.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/bean" />
+		<source-file src="src/android/java/bean/Groups.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/bean" />
+		<source-file src="src/android/java/bean/Permiss.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/bean" />
+
+
+		<!--common-->
+		<source-file src="src/android/java/common/ChpC.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/common" />
+		<source-file src="src/android/java/common/IsTrue.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/common" />
+		<source-file src="src/android/java/common/RedClient.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/common" />
+		<!--dao-->
+		<source-file src="src/android/java/dao/DaoMaster.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/dao" />
+		<source-file src="src/android/java/dao/DaoSession.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/dao" />
+		<source-file src="src/android/java/dao/DBManager.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/dao" />
+		<source-file src="src/android/java/dao/GroupMember.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/dao" />
+		<source-file src="src/android/java/dao/GroupMemberDao.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/dao" />
+		<source-file src="src/android/java/dao/GroupsDao.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/dao" />
+		<source-file src="src/android/java/dao/UserInfoManager.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/dao" />
+		<source-file src="src/android/java/dao/SealAppContext.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/dao" />
+		<source-file src="src/android/java/dao/PushMessageClass.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/dao" />
+
+
+		<!--fragment-->
+		<source-file src="src/android/java/fragment/OpenRedFragment.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/fragment" />
+		<source-file src="src/android/java/fragment/OpenRpBaseDialogFragment.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/fragment" />
+
+		<!--inter-->
+		<source-file src="src/android/java/inter/CPa.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/inter" />
+
+		<!--model-->
+		<source-file src="src/android/java/model/RedExtensionModule.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/model" />
+		<source-file src="src/android/java/model/RedGroupEnvelopePlugin.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/model" />
+		<source-file src="src/android/java/model/RpItemModel.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/model" />
+		<source-file src="src/android/java/model/MyExtensionModule.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/model" />
+		<!--msg-->
+
+		<source-file src="src/android/java/msg/RedPacketMessage.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/msg" />
+		<source-file src="src/android/java/msg/RedPacketMessageProvider.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/msg" />
+		<source-file src="src/android/java/msg/RedPacketOpenedMessage.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/msg" />
+		<source-file src="src/android/java/msg/RedPacketOpenMessageProvider.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/msg" />
+		<!--receiver-->
+		<source-file src="src/android/java/receiver/SealNotificationReceiver.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/receiver" />
+
+		<!--retrofit-->
+		<source-file src="src/android/java/retrofit/HttpUtil.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/retrofit" />
+		<source-file src="src/android/java/retrofit/OkhttpProvidede.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/retrofit" />
+		<source-file src="src/android/java/retrofit/api/Api.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/retrofit/api" />
+		<source-file src="src/android/java/retrofit/api/RetrofitService.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/retrofit/api" />
+		<source-file src="src/android/java/retrofit/callback/MyCallBack.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/retrofit/callback" />
+
+		<!--utils-->
+		<source-file src="src/android/java/utils/BaseDialogFragment.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/ColorUtils.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/DESUtil.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/DialogDisplay.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/DrawableUtil.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/InputPwdErrorDialogFragment.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/KeyboardUtil.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/LoadDialog.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/LoadingDialog.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/LoadingDialogFragment.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/MD5.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/NetUtils.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/NoDoubleClickUtils.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/ProgressWheel.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/RongGenerate.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/ScreenUtil.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/SharedPreferences.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/StringUtil.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/ToastUtils.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<!--view-->
+
+		<source-file src="src/android/java/view/ActionBarView.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/view" />
+		<source-file src="src/android/java/view/CircleImageView.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/view" />
+		<source-file src="src/android/java/view/MyTextWatcher.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/view" />
+		<source-file src="src/android/java/view/NoUnderClickableSpan.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/view" />
+		<source-file src="src/android/java/view/SelectableRoundedImageView.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/view" />
+		<source-file src="src/android/java/view/DialogWithYesOrNoUtils.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/view" />
+		<source-file src="src/android/java/view/DemoGridView.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/view" />
+
+
+		<source-file src="src/android/java/App.java" target-dir="src/cordova/plugin/ismartnet/rongcloud" />
+		<source-file src="src/android/java/RongCloudNav.java" target-dir="src/cordova/plugin/ismartnet/rongcloud" />
+
+
+
+		<!--libs-->
+		<source-file src="src/android/libs/AMap_2DMap_V2.9.0_20160525.jar" target-dir="libs" />
+		<source-file src="src/android/libs/AMap_Channel_Location_V1.4.0_20160708.jar" target-dir="libs" />
+		<source-file src="src/android/libs/AMap_Search_V3.4.0_20160811.jar" target-dir="libs" />
+		<source-file src="src/android/libs/fastjson-1.2.5.jar" target-dir="libs" />
+		<source-file src="src/android/libs/greendao-1.3.7.jar" target-dir="libs" />
+		
+		<source-file src="src/android/libs/arm64-v8a/libpush.so" target-dir="libs/arm64-v8a" />
+		<source-file src="src/android/libs/armeabi/libpush.so" target-dir="libs/armeabi" />
+		<source-file src="src/android/libs/armeabi-v7a/libpush.so" target-dir="libs/armeabi-v7a" />
+		<source-file src="src/android/libs/x86/libpush.so" target-dir="libs/x86" />
+		
+		<source-file src="src/android/libs/executable/arm64-v8a/push_daemon" target-dir="assets/arm64-v8a" />
+		<source-file src="src/android/libs/executable/armeabi/push_daemon" target-dir="assets/armeabi" />
+		<source-file src="src/android/libs/executable/armeabi-v7a/push_daemon" target-dir="assets/armeabi-v7a" />
+		<source-file src="src/android/libs/executable/x86/push_daemon" target-dir="assets/x86" />
+		
+
+		<framework src="com.android.support:appcompat-v7:25.3.1" />
+		<framework src="com.squareup.retrofit2:converter-gson:2.3.0" />
+		<framework src="com.squareup.retrofit2:retrofit:2.3.0" />
+		<framework src="com.android.support:multidex:1.0.1" />
+		<framework src="com.facebook.fresco:fresco:1.4.0" />
+		<framework src="com.squareup.okhttp:okhttp:2.5.0" />
+		<framework src="com.android.support:support-v4:25.3.1" />
+		<framework src="com.github.dingshuangdian:dsdry_no:v1.0.4" />
+		<framework src="com.squareup.picasso:picasso:2.5.2" />
+
+
+
+
+
+		<!--drawable-->
+		<source-file src="src/android/res/drawable/btn_list_item_bg.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/de_pic_chebox_photo.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/de_pic_checkbox.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/_bg_bribery_open.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/_bg_red_click_round.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/_bg_red_round.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/_bg_white_round.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/dialog_background.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/dialog_paytype_bg.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/ios_back_drawable.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/ksw_md_thumb.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/red_package_selector.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/selector_cursor.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/selector_list_item.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/selector_view_block.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/shape_round_white.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/selector_checkbox_green.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/_bg_white_round_stroke.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/round_spinner_fade.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/selector_common_btn.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/selector_btn_top.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/rc_progress_round.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/selector_btn_back.xml" target-dir="res/drawable" />
+
+
+
+		<!--图片资源-->
+		<source-file src="src/android/res/drawable-xhdpi/_bg_from_hongbao.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/_bg_to_hongbao.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/_btn_exit.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/_ic_arrow.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/_ic_charge.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/_ic_hongbao.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/_ic_hongbao_hover.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/_ic_pin.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/_rmb.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/_xiaobao_icon.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ac_back_icon.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/btn_back_press.9.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/crown.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/de_pic_image_selected.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/de_pic_image_unselect.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/failure.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ic_pin.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/icon_alipay_72.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/icon_check_false.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/icon_check_true.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/icon_wechat_72.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/open_rp.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/open_rp_arrow.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/open_rp_bg.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/open_rp_close.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/open_rp_top.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/pic_btn_selected.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/pic_btn_unselected.png" target-dir="res/drawable-xhdpi" />	
+		<source-file src="src/android/res/drawable-xhdpi/rc_progress_rotate.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/round_spinner_fade_00.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/round_spinner_fade_01.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/round_spinner_fade_02.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/round_spinner_fade_03.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/round_spinner_fade_04.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/round_spinner_fade_05.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/round_spinner_fade_06.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/round_spinner_fade_07.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/icon2_menu.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/success.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/top_back.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/default_useravatar.png" target-dir="res/drawable-xhdpi" />
+
+
+		<source-file src="src/android/res/anim/slide_left_in.xml" target-dir="res/anim" />
+		<source-file src="src/android/res/anim/slide_left_out.xml" target-dir="res/anim" />
+		<source-file src="src/android/res/anim/slide_right_in.xml" target-dir="res/anim" />
+		<source-file src="src/android/res/anim/slide_right_out.xml" target-dir="res/anim" />
+
+		<source-file src="src/android/res/layout/_activity_pay_type.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/_activity_rp_detail.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/_activity_send_group_peak.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/_activity_send_single_peak.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/_bribery_item.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/_dialog_open_rp.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/_dialog_pwd_error.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/_header_rp_detail.xml" target-dir="res/layout" />
+
+		<source-file src="src/android/res/layout/_item_rp_detail.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/_layout_actionbar.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/_open_packet.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/activity_conversation_list.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/activity_subconversation.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/con_layout.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/layout_base.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/layout_dialog_loading.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/pub_account_info.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/ui_dialog_loading.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/w_dialog_progress.xml" target-dir="res/layout" />
+
+		<source-file src="src/android/res/layout/activity_group_notice.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/activity_detail_group.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/social_chatsetting_gridview_item.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/dialog_view.xml" target-dir="res/layout" />
+
+		<source-file src="src/android/res/values/attrs.xml" target-dir="res/values" />
+		<source-file src="src/android/res/values/colors.xml" target-dir="res/values" />
+		<source-file src="src/android/res/values/dimens.xml" target-dir="res/values" />
+		<source-file src="src/android/res/values/my_styles.xml" target-dir="res/values" />
+		<source-file src="src/android/res/values/theme.xml" target-dir="res/values" />
+		<source-file src="src/android/res/values/red_strings.xml" target-dir="res/values" />
+		<source-file src="src/android/res/color/ksw_md_back_color.xml" target-dir="res/color" />
+
+
+	</platform>
+	<platform name="ios">
+		<config-file parent="/*" target="config.xml">
+			<feature name="RongCloudNav">
+				<param name="ios-package" value="RongCloudNav" />
+			</feature>
+		</config-file>
+
+		<config-file parent="NSCameraUsageDescription" target="*-Info.plist">
+			<string>应用需要您的同意,才能访问相机</string>
+		</config-file>
+
+		<config-file parent="NSPhotoLibraryUsageDescription" target="*-Info.plist">
+			<string>应用需要您的同意,才能访问相册</string>
+		</config-file>
+
+		<config-file parent="NSLocationWhenInUseUsageDescription" target="*-Info.plist">
+			<string>应用需要您的同意,才能访问位置</string>
+		</config-file>
+        
+        <config-file parent="NSMicrophoneUsageDescription" target="*-Info.plist">
+            <string>应用需要您的同意,才能访问麦克风</string>
+        </config-file>
+
+		<header-file src="src/ios/RongCloudNav.h" />
+		<source-file src="src/ios/RongCloudNav.m" />
+
+		<framework src="AssetsLibrary.framework" weak="true" />
+		<framework src="AudioToolbox.framework" weak="true" />
+		<framework src="AVFoundation.framework" weak="true" />
+		<framework src="CFNetwork.framework" weak="true" />
+		<framework src="CoreAudio.framework" weak="true" />
+		<framework src="CoreGraphics.framework" weak="true" />
+		<framework src="CoreLocation.framework" weak="true" />
+		<framework src="CoreMedia.framework" weak="true" />
+		<framework src="CoreTelephony.framework" weak="true" />
+
+		<framework src="CoreVideo.framework" weak="true" />
+		<framework src="ImageIO.framework" weak="true" />
+		<framework src="libc++.tbd" weak="true" />
+		<framework src="libc++abi.tbd" weak="true" />
+		<framework src="libsqlite3.tbd" weak="true" />
+		<framework src="libstdc++.tbd" weak="true" />
+		<framework src="libxml2.tbd" weak="true" />
+		<framework src="libz.tbd" weak="true" />
+		<framework src="MapKit.framework" weak="true" />
+
+		<framework src="OpenGLES.framework" weak="true" />
+		<framework src="QuartzCore.framework" weak="true" />
+		<framework src="SystemConfiguration.framework" weak="true" />
+		<framework src="UIKit.framework" weak="true" />
+		<framework src="Photos.framework" weak="true" />
+		<framework src="SafariServices.framework" weak="true" />
+		<framework src="CoreMotion.framework" weak="true" />
+		<framework src="VideoToolbox.framework" weak="true" />
+		<framework src="libresolv.tbd" weak="true" />
+	</platform>
+</plugin>
