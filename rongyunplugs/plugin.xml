@@ -241,7 +241,7 @@
 		<framework src="com.facebook.fresco:fresco:1.4.0" />
 		<framework src="com.squareup.okhttp:okhttp:2.5.0" />
 		<framework src="com.android.support:support-v4:25.3.1" />
-		<framework src="com.github.dingshuangdian:dsdry_no:v1.0.4" />
+		<framework src="com.github.dingshuangdian:dsdry_no:v1.0.5" />
 		<framework src="com.squareup.picasso:picasso:2.5.2" />
 
 

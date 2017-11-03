@@ -4,17 +4,12 @@ import android.content.Context;
 import android.text.Spannable;
 import android.text.TextUtils;
 import android.util.Log;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
-
-import cordova.plugin.chief.push.PushInit;
 import cordova.plugin.ismartnet.rongcloud.App;
 import cordova.plugin.ismartnet.rongcloud.RongCloudNav;
-import cordova.plugin.ismartnet.rongcloud.bean.CurrentUser;
 import cordova.plugin.ismartnet.rongcloud.retrofit.api.Api;
 import cordova.plugin.ismartnet.rongcloud.utils.SharedPreferences;
 import io.rong.common.RLog;
@@ -30,9 +25,6 @@ import io.rong.imlib.model.MentionedInfo;
 import io.rong.imlib.model.Message;
 import io.rong.imlib.model.UserInfo;
 import io.rong.message.RecallNotificationMessage;
-import io.rong.push.RongPushClient;
-import io.rong.push.notification.PushNotificationMessage;
-
 /**
  * 融云相关监听 事件集合类
  * Created by AMing on 16/1/7.

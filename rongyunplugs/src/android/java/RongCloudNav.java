@@ -23,8 +23,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import cordova.plugin.chief.push.MobilePhoneType;
-import cordova.plugin.chief.push.PushInit;
-import cordova.plugin.chief.push.PushProcessingClass;
+
 import cordova.plugin.ismartnet.rongcloud.bean.GroupMsg;
 import cordova.plugin.ismartnet.rongcloud.bean.Permiss;
 import cordova.plugin.ismartnet.rongcloud.dao.PushMessageClass;
@@ -84,10 +83,19 @@ public class RongCloudNav extends CordovaPlugin {
   @Override
   public boolean execute(final String action, final JSONArray args, final CallbackContext callbackContext) throws JSONException {
     if (action.equals("connectWithToken")) {
-      connect(args, callbackContext);
+      cordova.getThreadPool().execute(new Runnable() {
+        @Override
+        public void run() {
+          connect(args, callbackContext);
+        }
+      });
     }
+
     if (action.equals("pushConversionView")) {
-      getGroupChat(args, callbackContext);
+     
+          getGroupChat(args, callbackContext);
+ 
+
     }
     if (action.equals("startWithHost")) {
       getUrl(args, callbackContext);
@@ -105,7 +113,7 @@ public class RongCloudNav extends CordovaPlugin {
         try {
           phoneType = MobilePhoneType.getType(cordovaActivity);
 
-          Method method = PushInit.class.getDeclaredMethod(action, JSONArray.class, CallbackContext.class, String.class, CordovaInterface.class);
+          Method method = RongCloudNav.class.getDeclaredMethod(action, JSONArray.class, CallbackContext.class, String.class, CordovaInterface.class);
           method.invoke(RongCloudNav.this, args, callbackContext, phoneType, cordova);
 
         } catch (NoSuchMethodException noSuchMethodException) {
@@ -337,7 +345,7 @@ public class RongCloudNav extends CordovaPlugin {
     if (instance == null) {
       return;
     }
-    PushMessageClass.ReceiveNotice(cordovaActivity, instance, cordovaWebView, extrasJson);
+    PushMessageClass.receiveMessage(cordovaActivity, instance, cordovaWebView, extrasJson);
   }
   /**
    * 打开通知
