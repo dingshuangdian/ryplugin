@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
+import cordova.plugin.chief.push.MobilePhoneType;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -102,7 +103,7 @@ public class RongCloudNav extends CordovaPlugin {
       @Override
       public void run() {
         try {
-          phoneType = "SYS_JiGUANG";
+           phoneType = MobilePhoneType.getType(cordovaActivity);
 
           Method method = RongCloudNav.class.getDeclaredMethod(action, JSONArray.class, CallbackContext.class, String.class, CordovaInterface.class);
           method.invoke(RongCloudNav.this, args, callbackContext, phoneType, cordova);
