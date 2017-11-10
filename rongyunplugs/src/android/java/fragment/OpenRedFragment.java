@@ -1,30 +1,25 @@
 package cordova.plugin.ismartnet.rongcloud.fragment;
-
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.guoji.tpco.R;
 import com.squareup.picasso.Picasso;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import cordova.plugin.ismartnet.rongcloud.retrofit.callback.MyCallBack;
 import cordova.plugin.ismartnet.rongcloud.retrofit.HttpUtil;
 import cordova.plugin.ismartnet.rongcloud.retrofit.api.Api;
 import cordova.plugin.ismartnet.rongcloud.bean.Receive;
 import cordova.plugin.ismartnet.rongcloud.utils.DrawableUtil;
 import cordova.plugin.ismartnet.rongcloud.utils.NoDoubleClickUtils;
+import cordova.plugin.ismartnet.rongcloud.utils.ResourcesUtils;
 import cordova.plugin.ismartnet.rongcloud.utils.RongGenerate;
 import cordova.plugin.ismartnet.rongcloud.utils.SharedPreferences;
 import cordova.plugin.ismartnet.rongcloud.utils.StringUtil;
 import cordova.plugin.ismartnet.rongcloud.utils.ToastUtils;
 import cordova.plugin.ismartnet.rongcloud.activity.RpDetailActivityRp;
-
 import cordova.plugin.ismartnet.rongcloud.bean.CurrentUser;
 import cordova.plugin.ismartnet.rongcloud.bean.SendUser;
 import cordova.plugin.ismartnet.rongcloud.msg.RedPacketOpenedMessage;
@@ -60,20 +55,20 @@ public class OpenRedFragment extends OpenRpBaseDialogFragment {
 
   @Override
   public int getLayoutId() {
-    return R.layout._dialog_open_rp;
+    return ResourcesUtils.getLayoutId(getActivity(),"_dialog_open_rp");
   }
 
   @Override
   public void initView() {
     super.initView();
-    iv_close = (ImageView) this.rootView.findViewById(R.id.iv_close);
-    iv_header = (ImageView) this.rootView.findViewById(R.id.iv_header);
-    iv_open_rp = (ImageView) this.rootView.findViewById(R.id.iv_open_rp);
-    tv_name = (TextView) this.rootView.findViewById(R.id.tv_name);
-    tv_send_rp = (TextView) this.rootView.findViewById(R.id.tv_send_rp);
-    tv_tip = (TextView) this.rootView.findViewById(R.id.tv_tip);
-    tv_no_rp = (TextView) this.rootView.findViewById(R.id.tv_no_rp);
-    tv_look_others = (TextView) this.rootView.findViewById(R.id.tv_look_others);
+    iv_close = (ImageView) this.rootView.findViewById(ResourcesUtils.getId(getActivity(),"iv_close"));
+    iv_header = (ImageView) this.rootView.findViewById(ResourcesUtils.getId(getActivity(),"iv_header"));
+    iv_open_rp = (ImageView) this.rootView.findViewById(ResourcesUtils.getId(getActivity(),"iv_open_rp"));
+    tv_send_rp = (TextView) this.rootView.findViewById(ResourcesUtils.getId(getActivity(),"tv_send_rp"));
+    tv_tip = (TextView) this.rootView.findViewById(ResourcesUtils.getId(getActivity(),"tv_tip"));
+    tv_no_rp = (TextView) this.rootView.findViewById(ResourcesUtils.getId(getActivity(),"tv_no_rp"));
+    tv_look_others = (TextView) this.rootView.findViewById(ResourcesUtils.getId(getActivity(),"tv_look_others"));
+    tv_name= (TextView) this.rootView.findViewById(ResourcesUtils.getId(getActivity(),"tv_name"));
   }
 
   @Override
@@ -92,6 +87,7 @@ public class OpenRedFragment extends OpenRpBaseDialogFragment {
       envelope_id = var1.getString("envelopeId");
       envelopeStatus = var1.getString("envelopeStatus");
       userName = CurrentUser.getNameById(SendUser.sendUserId);
+      Log.e("userName",userName);
       bless = var1.getString("bless");
       if (StringUtil.isNotEmpty(CurrentUser.getUserIconById(SendUser.sendUserId))) {
         Picasso.with(this.fromActivity).load(CurrentUser.getUserIconById(SendUser.sendUserId)).into(iv_header);
@@ -99,7 +95,7 @@ public class OpenRedFragment extends OpenRpBaseDialogFragment {
         Picasso.with(fromActivity).load(RongGenerate.generateDefaultAvatar(userName, SendUser.sendUserId)).into(iv_header);
       }
       this.tv_name.setText(userName);
-      DrawableUtil.setRightDrawable(this.fromActivity, this.tv_name, R.drawable._ic_pin, true);
+      DrawableUtil.setRightDrawable(this.fromActivity, this.tv_name, ResourcesUtils.getDrawableId(getActivity(),"_ic_pin"), true);
       if (envelopeStatus.equals("0")) {
         cView();
       } else if (envelopeStatus.equals("1")) {
@@ -112,12 +108,12 @@ public class OpenRedFragment extends OpenRpBaseDialogFragment {
 
   private void aView() {
     tv_no_rp.setVisibility(View.VISIBLE);
-    tv_no_rp.setText(this.getActivity().getString(R.string.no_rp));
+    tv_no_rp.setText(this.getActivity().getString( ResourcesUtils.getStringId(getActivity(),"no_rp")));
   }
 
   private void bView() {
     tv_tip.setVisibility(View.VISIBLE);
-    tv_tip.setText(this.getActivity().getString(R.string.rp_send));
+    tv_tip.setText(this.getActivity().getString(ResourcesUtils.getStringId(getActivity(),"rp_send")));
   }
 
   /**
@@ -132,13 +128,13 @@ public class OpenRedFragment extends OpenRpBaseDialogFragment {
 
   @Override
   public void onClick(int var1) {
-    if (var1 == R.id.iv_close) {
+    if (var1 == ResourcesUtils.getId(getActivity(),"iv_close")) {
       this.dismiss();
-    } else if (var1 == R.id.iv_open_rp) {
+    } else if (var1 == ResourcesUtils.getId(getActivity(),"iv_open_rp")) {
       if (!this.m && !NoDoubleClickUtils.isDoubleClick()) {
         this.d();
       }
-    } else if (var1 == R.id.tv_look_others) {
+    } else if (var1 == ResourcesUtils.getId(getActivity(),"tv_look_others")) {
       RpDetailActivityRp.intent(this.fromActivity, 1, user_id, envelope_id, userName, CurrentUser.getNameById(SendUser.sendUserId), bless);
     }
   }

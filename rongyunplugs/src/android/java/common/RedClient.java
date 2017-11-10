@@ -3,9 +3,6 @@ package cordova.plugin.ismartnet.rongcloud.common;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-
-import com.guoji.tpco.R;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +12,7 @@ import cordova.plugin.ismartnet.rongcloud.retrofit.api.Api;
 import cordova.plugin.ismartnet.rongcloud.bean.Receive;
 import cordova.plugin.ismartnet.rongcloud.utils.DialogDisplay;
 import cordova.plugin.ismartnet.rongcloud.utils.LoadingDialogFragment;
+import cordova.plugin.ismartnet.rongcloud.utils.ResourcesUtils;
 import cordova.plugin.ismartnet.rongcloud.utils.SharedPreferences;
 import cordova.plugin.ismartnet.rongcloud.utils.ToastUtils;
 import cordova.plugin.ismartnet.rongcloud.fragment.OpenRedFragment;
@@ -45,7 +43,7 @@ public class RedClient {
   }
 
   private static void openRedPacket(final Activity var0, int var1, final String var2, final String var3, String var4, final String var5, final String var6) {
-    DialogDisplay.getInstance().dialogLoading(var0, var0.getString(R.string.waiting), mloadListener);
+    DialogDisplay.getInstance().dialogLoading(var0, var0.getString(ResourcesUtils.getStringId(var0,"waiting")), mloadListener);
     Map<String, String> map = new HashMap<>();
     map.put("bonusId", var5);
     map.put("tokenId", SharedPreferences.getInstance(var0).getStringValue(Api.BD_TOKEN_ID));

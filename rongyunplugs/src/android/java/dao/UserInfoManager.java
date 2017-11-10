@@ -31,13 +31,10 @@ import cordova.plugin.ismartnet.rongcloud.utils.StringUtil;
 import cordova.plugin.ismartnet.rongcloud.utils.ToastUtils;
 import io.rong.common.RLog;
 import io.rong.imkit.RongIM;
-import io.rong.imkit.tools.CharacterParser;
-import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Group;
 import io.rong.imlib.model.UserInfo;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.HttpException;
 import retrofit2.Response;
 
 /**

@@ -1,5 +1,4 @@
 package cordova.plugin.ismartnet.rongcloud.fragment;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -7,10 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.guoji.tpco.R;
-
 import cordova.plugin.ismartnet.rongcloud.inter.CPa;
+import cordova.plugin.ismartnet.rongcloud.utils.ResourcesUtils;
 import cordova.plugin.ismartnet.rongcloud.utils.ScreenUtil;
 
 /**
@@ -30,7 +27,7 @@ public abstract class OpenRpBaseDialogFragment extends DialogFragment implements
     this.initView();
     this.initListener();
     this.initData(this.getArguments());
-    Dialog var3 = new Dialog(this.getActivity(), R.style.DialogTheme);
+    Dialog var3 = new Dialog(this.getActivity(), ResourcesUtils.getStyleId(getActivity(),"DialogTheme"));
     ViewGroup.LayoutParams var4 = new ViewGroup.LayoutParams(ScreenUtil.dp2px(this.getActivity(), 300), -2);
     var3.addContentView(this.rootView, var4);
     return var3;

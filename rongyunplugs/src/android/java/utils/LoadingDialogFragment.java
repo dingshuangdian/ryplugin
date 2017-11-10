@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.guoji.tpco.R;
 
 
 /**
@@ -45,12 +44,12 @@ public class LoadingDialogFragment extends DialogFragment {
 
   public Dialog onCreateDialog(Bundle var1) {
     LayoutInflater var2 = this.getActivity().getLayoutInflater();
-    View var3 = var2.inflate(R.layout.w_dialog_progress, (ViewGroup)null);
-    this.tvMessage = (TextView)var3.findViewById(R.id.textview_message);
-    this.ivSuccess = (ImageView)var3.findViewById(R.id.imageview_success);
-    this.ivFailure = (ImageView)var3.findViewById(R.id.imageview_failure);
-    this.ivProgressSpinner = (ImageView)var3.findViewById(R.id.imageview_progress_spinner);
-    Dialog var4 = new Dialog(this.getActivity(), R.style.DialogTheme);
+    View var3 = var2.inflate(ResourcesUtils.getLayoutId(getActivity(),"w_dialog_progress"), (ViewGroup)null);
+    this.tvMessage = (TextView)var3.findViewById(ResourcesUtils.getId(getActivity(),"textview_message"));
+    this.ivSuccess = (ImageView)var3.findViewById(ResourcesUtils.getId(getActivity(),"imageview_success"));
+    this.ivFailure = (ImageView)var3.findViewById(ResourcesUtils.getId(getActivity(),"imageview_failure"));
+    this.ivProgressSpinner = (ImageView)var3.findViewById(ResourcesUtils.getId(getActivity(),"imageview_progress_spinner"));
+    Dialog var4 = new Dialog(this.getActivity(), ResourcesUtils.getStyleId(getActivity(),"DialogTheme"));
     var4.setCanceledOnTouchOutside(false);
     ViewGroup.LayoutParams var5 = new ViewGroup.LayoutParams(ScreenUtil.dp2px(this.getActivity(), 100), ScreenUtil.dp2px(this.getActivity(), 100));
     var4.addContentView(var3, var5);
@@ -63,7 +62,7 @@ public class LoadingDialogFragment extends DialogFragment {
   }
 
   protected void initData(Bundle var1) {
-    this.ivProgressSpinner.setImageResource(R.drawable.round_spinner_fade);
+    this.ivProgressSpinner.setImageResource(ResourcesUtils.getDrawableId(getActivity(),"round_spinner_fade"));
     this.adProgressSpinner = (AnimationDrawable)this.ivProgressSpinner.getDrawable();
     this.adProgressSpinner.start();
   }

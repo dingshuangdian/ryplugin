@@ -1,34 +1,27 @@
 package cordova.plugin.ismartnet.rongcloud;
-
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.text.TextUtils;
-import android.util.Log;
-
 import com.facebook.drawee.backends.pipeline.Fresco;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-
 import cordova.plugin.ismartnet.rongcloud.dao.SealAppContext;
 import cordova.plugin.ismartnet.rongcloud.dao.UserInfoManager;
 import cordova.plugin.ismartnet.rongcloud.model.MyExtensionModule;
+import cordova.plugin.ismartnet.rongcloud.model.VideoExtensionModule;
 import cordova.plugin.ismartnet.rongcloud.retrofit.api.Api;
+import cordova.plugin.ismartnet.rongcloud.utils.PathUtil;
 import cordova.plugin.ismartnet.rongcloud.utils.SharedPreferences;
-
-
 import cordova.plugin.ismartnet.rongcloud.model.RedExtensionModule;
 import cordova.plugin.ismartnet.rongcloud.utils.StringUtil;
 import io.rong.imkit.DefaultExtensionModule;
 import io.rong.imkit.IExtensionModule;
 import io.rong.imkit.RongExtensionManager;
 import io.rong.imkit.RongIM;
-import io.rong.imlib.RongIMClient;
-import io.rong.imlib.model.Message;
 import io.rong.push.RongPushClient;
 
 /**
@@ -51,6 +44,7 @@ public class App extends MultiDexApplication {
     Fresco.initialize(this);
     UserInfoManager.init(this);
     UserInfoManager.getInstance().initDB();
+    PathUtil.getInstance().initDirs("record", "video", this);
     //openSealDBIfHasCachedToken();
     mInstance = this;
     if (getApplicationInfo().packageName.equals(getCurProcessName(getApplicationContext()))) {
@@ -86,6 +80,7 @@ public class App extends MultiDexApplication {
         }
       }
       RongExtensionManager.getInstance().registerExtensionModule(new RedExtensionModule(mInstance));
+      RongExtensionManager.getInstance().registerExtensionModule(new VideoExtensionModule());
     }
   }
 

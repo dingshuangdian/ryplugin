@@ -70,6 +70,15 @@
   <color name="gainsboro">#dcdcdc</color>
   <color name="bg_color">#f1f1f1</color>
   <color name="grey_btn_color_normal">#fff1f1f1</color>
+  <color name="top_bar_normal_bg">#00acff</color>
+  <color name="btn_gray_normal">#c0c0c0</color>
+  <color name="grid_state_pressed">#1Affffff</color>
+  <color name="grid_state_focused">#80000000</color>
+  <color name="videobackcolor">#FF333333</color>
+  <color name="colorPrimary">#3F51B5</color>
+  <color name="colorPrimaryDark">#303F9F</color>
+  <color name="colorAccent">#FF4081</color>
+  <color name="btn_rect_alpha">#56b3b3b3</color>
 
 
 </resources>

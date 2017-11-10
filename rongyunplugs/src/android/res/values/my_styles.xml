@@ -183,6 +183,30 @@
     <item name="android:windowFullscreen">true</item>
     <item name="android:backgroundDimEnabled">true</item>
   </style>
+  <style name="chat_text_date_style">
+    <item name="android:padding">2dp</item>
+    <item name="android:paddingTop">2dip</item>
+    <item name="android:paddingBottom">2dip</item>
+    <item name="android:paddingLeft">12dip</item>
+    <item name="android:paddingRight">12dip</item>
+    <item name="android:textColor">@color/btn_gray_normal</item>
+    <item name="android:textSize">12sp</item>
+    <item name="android:background">@drawable/ease_timestampe_bg</item>
+  </style>
+  <style name="chat_content_date_style">
+    <item name="android:minHeight">50dp</item>
+    <item name="android:gravity">center</item>
+    <item name="android:textColor">#000000</item>
+    <item name="android:textSize">15sp</item>
+    <item name="android:lineSpacingExtra">2dp</item>
+    <item name="android:background">#bfbfbf</item>
+  </style>
+
+  <style name="chat_text_name_style">
+    <item name="android:textColor">#818181</item>
+    <item name="android:textSize">15sp</item>
+    <item name="android:gravity">center</item>
+  </style>
 
   <!--CircleImageView属性-->
   <declare-styleable name="Ry_CircleImageView">
@@ -191,4 +215,18 @@
     <attr name="ry_civ_border_overlay" format="boolean" />
     <attr name="ry_civ_fill_color" format="color" />
   </declare-styleable>
+  <!-- window 透明的-->
+  <style name="Theme.AppCompat.Translucent" parent="AppTheme">
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:colorBackgroundCacheHint">@null</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorPrimaryDark</item>
+  </style>
 </resources>

@@ -11,10 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.guoji.tpco.R;
-
 import cordova.plugin.ismartnet.rongcloud.bean.CurrentUser;
+import cordova.plugin.ismartnet.rongcloud.utils.ResourcesUtils;
 import cordova.plugin.ismartnet.rongcloud.utils.StringUtil;
 import io.rong.imkit.model.ProviderTag;
 import io.rong.imkit.model.UIMessage;
@@ -38,24 +36,19 @@ public class RedPacketOpenMessageProvider extends IContainerItemProvider.Message
     if (var3 != null) {
       //当前id
       String var6 = CurrentUser.getUserId();
-      Log.e("SendUser.sendUserId", var6);
       //接收人id
       String var7 = var3.getReceiveUserId();
-      Log.e("var7", var7);
       //发红包人名称
       String var8 = var3.getSendUserName();
       if(StringUtil.isEmptyAndNull(var8)){
         var8=var6;
       }
-      Log.e("var8", var8);
       //接收人名称
       String var9 = var3.getReceiveUserName();
       if(StringUtil.isEmptyAndNull(var8)){
         var9=var7;
       }
-      Log.e("var9", var9);
      if(TextUtils.isEmpty(var6) || TextUtils.isEmpty(var7)) {
-        Log.i("JrmfRedPacketOpened", "idddd不能为空!!!");
         return ;
       }
       String tipMsg;
@@ -76,7 +69,6 @@ public class RedPacketOpenMessageProvider extends IContainerItemProvider.Message
     if (var1 != null) {
       //红包人id
       String var6 = CurrentUser.getUserId();
-      Log.e("SendUser.sendUserId", var6);
       //接收人id
       String var7 = var1.getReceiveUserId();
       //发红包人名称
@@ -90,7 +82,6 @@ public class RedPacketOpenMessageProvider extends IContainerItemProvider.Message
         var9=var7;
       }
       if(TextUtils.isEmpty(var6) || TextUtils.isEmpty(var7)) {
-        Log.i("JrmfRedPacketOpened", "id不能为空!!!");
         return null;
       }
       String tipMsg;
@@ -114,16 +105,15 @@ public class RedPacketOpenMessageProvider extends IContainerItemProvider.Message
   }
 
   public View newView(Context var1, ViewGroup var2) {
-    View var3 = LayoutInflater.from(var1).inflate(R.layout._open_packet, (ViewGroup) null);
+    View var3 = LayoutInflater.from(var1).inflate(ResourcesUtils.getLayoutId(var1,"_open_packet"), (ViewGroup) null);
     RedPacketOpenMessageProvider.ViewHolder var4 = new RedPacketOpenMessageProvider.ViewHolder();
-    var4.packet_message = (TextView) var3.findViewById(R.id.packet_message);
+    var4.packet_message = (TextView) var3.findViewById(ResourcesUtils.getId(var1,"packet_message"));
     var3.setTag(var4);
     return var3;
   }
 
   class ViewHolder {
     TextView packet_message;
-
     ViewHolder() {
     }
   }

@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.AbsoluteSizeSpan;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -18,7 +19,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.guoji.tpco.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -33,6 +33,7 @@ import cordova.plugin.ismartnet.rongcloud.retrofit.HttpUtil;
 import cordova.plugin.ismartnet.rongcloud.retrofit.api.Api;
 import cordova.plugin.ismartnet.rongcloud.utils.DialogDisplay;
 import cordova.plugin.ismartnet.rongcloud.utils.DrawableUtil;
+import cordova.plugin.ismartnet.rongcloud.utils.ResourcesUtils;
 import cordova.plugin.ismartnet.rongcloud.utils.RongGenerate;
 import cordova.plugin.ismartnet.rongcloud.utils.SharedPreferences;
 import cordova.plugin.ismartnet.rongcloud.utils.StringUtil;
@@ -55,7 +56,6 @@ import retrofit2.Response;
 public class RpDetailActivityRp extends RpBaseActivity implements AbsListView.OnScrollListener {
   private ListView listView;
   private ImageView iv_avatar;
-
   private TextView tv_look_rp_history;
   private TextView tv_username;
   private TextView tv_bless;
@@ -93,19 +93,19 @@ public class RpDetailActivityRp extends RpBaseActivity implements AbsListView.On
 
   @Override
   public void initView() {
-    this.actionBarView = (ActionBarView) this.findViewById(R.id.actionbar);
-    this.listView = (ListView) this.findViewById(R.id.listView);
-    this.tv_look_rp_history = (TextView) this.findViewById(R.id.tv_look_rp_history);
-    View var1 = View.inflate(this, R.layout._header_rp_detail, (ViewGroup) null);
-    this.iv_avatar = (ImageView) var1.findViewById(R.id.iv_avatar);
+    this.actionBarView = (ActionBarView) this.findViewById(ResourcesUtils.getId(RpDetailActivityRp.this, "actionbar"));
+    this.listView = (ListView) this.findViewById(ResourcesUtils.getId(RpDetailActivityRp.this, "listView"));
+    this.tv_look_rp_history = (TextView) this.findViewById(ResourcesUtils.getId(RpDetailActivityRp.this, "tv_look_rp_history"));
+    View var1 = View.inflate(this, ResourcesUtils.getLayoutId(RpDetailActivityRp.this, "_header_rp_detail"), (ViewGroup) null);
+    this.iv_avatar = (ImageView) var1.findViewById(ResourcesUtils.getId(RpDetailActivityRp.this, "iv_avatar"));
     //发包人
-    this.tv_username = (TextView) var1.findViewById(R.id.tv_username);
+    this.tv_username = (TextView) var1.findViewById(ResourcesUtils.getId(RpDetailActivityRp.this, "tv_username"));
     //祝福语
-    this.tv_bless = (TextView) var1.findViewById(R.id.tv_bless);
+    this.tv_bless = (TextView) var1.findViewById(ResourcesUtils.getId(RpDetailActivityRp.this, "tv_bless"));
     //领取的金额
-    this.tv_rec_amount = (TextView) var1.findViewById(R.id.tv_rec_amount);
+    this.tv_rec_amount = (TextView) var1.findViewById(ResourcesUtils.getId(RpDetailActivityRp.this, "tv_rec_amount"));
     //领取的数量
-    this.tv_rp_num = (TextView) var1.findViewById(R.id.tv_rp_num);
+    this.tv_rp_num = (TextView) var1.findViewById(ResourcesUtils.getId(RpDetailActivityRp.this, "tv_rp_num"));
     this.listView.addHeaderView(var1);
 
   }
@@ -133,7 +133,7 @@ public class RpDetailActivityRp extends RpBaseActivity implements AbsListView.On
   }
 
   private void getReceive() {
-    DialogDisplay.getInstance().dialogLoading(this.context, this.getString(R.string.loading));
+    DialogDisplay.getInstance().dialogLoading(this.context, this.getString(ResourcesUtils.getStringId(RpDetailActivityRp.this, "loading")));
     Map<String, String> map = new HashMap<>();
     map.put("bonusId", rpId);
     map.put("tokenId", SharedPreferences.getInstance(RpDetailActivityRp.this).getStringValue(Api.BD_TOKEN_ID));
@@ -151,6 +151,7 @@ public class RpDetailActivityRp extends RpBaseActivity implements AbsListView.On
           }
         }
       }
+
       @Override
       public void onFail(String message) {
         DialogDisplay.getInstance().dialogCloseLoading(RpDetailActivityRp.this);
@@ -168,9 +169,9 @@ public class RpDetailActivityRp extends RpBaseActivity implements AbsListView.On
     this.tv_username.setText(userName + "的红包");
     this.tv_bless.setText(bless);
     if (rpItemModel.getResult().getIssueTypeId() == 2) {
-      DrawableUtil.setRightDrawable(this.context, this.tv_username, R.drawable._ic_pin, true);
+      DrawableUtil.setRightDrawable(this.context, this.tv_username, ResourcesUtils.getDrawableId(RpDetailActivityRp.this, "_ic_pin"), true);
     } else {
-      DrawableUtil.setRightDrawable(this.context, this.tv_username, R.drawable._ic_pin, false);
+      DrawableUtil.setRightDrawable(this.context, this.tv_username, ResourcesUtils.getDrawableId(RpDetailActivityRp.this, "_ic_pin"), false);
     }
     if (!rpItemModel.getResult().getIsReceive().equals("false")) {
       for (int i = 0; i < rpItemModel.getResult().getRecord().size(); i++) {
@@ -186,9 +187,9 @@ public class RpDetailActivityRp extends RpBaseActivity implements AbsListView.On
       this.tv_rec_amount.setVisibility(View.GONE);
     }
     if (rpItemModel.getResult().getReceiveNum() == rpItemModel.getResult().getSplitNum()) {
-      this.tv_rp_num.setText(String.format(this.getString(R.string.self_rp_no_left), new Object[]{Integer.valueOf(String.valueOf(rpItemModel.getResult().getReceiveNum())), Integer.valueOf(rpItemModel.getResult().getSplitNum()), StringUtil.formatMoney(rpItemModel.getResult().getOrderAmount())}));
+      this.tv_rp_num.setText(String.format(this.getString(ResourcesUtils.getStringId(RpDetailActivityRp.this, "self_rp_no_left")), new Object[]{Integer.valueOf(String.valueOf(rpItemModel.getResult().getReceiveNum())), Integer.valueOf(rpItemModel.getResult().getSplitNum()), StringUtil.formatMoney(rpItemModel.getResult().getOrderAmount())}));
     } else {
-      this.tv_rp_num.setText(String.format(this.getString(R.string.self_rp_has_left), new Object[]{Integer.valueOf(String.valueOf(rpItemModel.getResult().getReceiveNum())), Integer.valueOf(rpItemModel.getResult().getSplitNum()), StringUtil.formatMoney(rpItemModel.getResult().getReceiveAmount()), rpItemModel.getResult().getOrderAmount()}));
+      this.tv_rp_num.setText(String.format(this.getString(ResourcesUtils.getStringId(RpDetailActivityRp.this, "self_rp_has_left")), new Object[]{Integer.valueOf(String.valueOf(rpItemModel.getResult().getReceiveNum())), Integer.valueOf(rpItemModel.getResult().getSplitNum()), StringUtil.formatMoney(rpItemModel.getResult().getReceiveAmount()), rpItemModel.getResult().getOrderAmount()}));
     }
   }
 
@@ -237,7 +238,7 @@ public class RpDetailActivityRp extends RpBaseActivity implements AbsListView.On
 
   @Override
   public int getLayoutId() {
-    return R.layout._activity_rp_detail;
+    return ResourcesUtils.getLayoutId(RpDetailActivityRp.this, "_activity_rp_detail");
   }
 
   class RpDetailAdapter extends DetailBaseAdapter<Object> {
@@ -257,10 +258,10 @@ public class RpDetailActivityRp extends RpBaseActivity implements AbsListView.On
       TextView var8;
       RpItemModel.ResultBean.RecordBean var11 = (RpItemModel.ResultBean.RecordBean) RpDetailActivityRp.this.rpItemModelList.get(var1);
       RpItemModel rpItemModel = (RpItemModel) tempMap.get(Api.RPMODEL);
-      cAdapter var12 = cAdapter.a(RpDetailActivityRp.this.context, var2, var3, R.layout._item_rp_detail, var1);
+      cAdapter var12 = cAdapter.a(RpDetailActivityRp.this.context, var2, var3, ResourcesUtils.getLayoutId(RpDetailActivityRp.this, "_item_rp_detail"), var1);
       //领取人名称
-      TextView var13 = (TextView) var12.a(R.id.tv_name);
-      SimpleDraweeView iv_header = var12.a(R.id.iv_header);
+      TextView var13 = (TextView) var12.a(ResourcesUtils.getId(RpDetailActivityRp.this, "tv_name"));
+      SimpleDraweeView iv_header = var12.a(ResourcesUtils.getId(RpDetailActivityRp.this, "iv_header"));
       if (!StringUtil.isEmptyAndNull(var11.getHeadImg())) {
         iv_header.setImageURI(Uri.parse(var11.getHeadImg()));
       } else {
@@ -268,17 +269,17 @@ public class RpDetailActivityRp extends RpBaseActivity implements AbsListView.On
         iv_header.setImageURI(RongGenerate.generateDefaultAvatar(var11.getUserName(), var11.getUserId()));
       }
       //领取时间
-      var8 = (TextView) var12.a(R.id.tv_time);
+      var8 = (TextView) var12.a(ResourcesUtils.getId(RpDetailActivityRp.this, "tv_time"));
       //领取金额
-      TextView var14 = (TextView) var12.a(R.id.tv_amount);
+      TextView var14 = (TextView) var12.a(ResourcesUtils.getId(RpDetailActivityRp.this, "tv_amount"));
       //手气最佳
-      TextView var10 = (TextView) var12.a(R.id.tv_best);
+      TextView var10 = (TextView) var12.a(ResourcesUtils.getId(RpDetailActivityRp.this, "tv_best"));
       var13.setText(var11.getUserName());
       var8.setText(var11.getReceiveTime());
       var14.setText(StringUtil.formatMoney(var11.getBonusAmount()) + "元");
       if (rpItemModel.getResult().getReceiveNum() == rpItemModel.getResult().getSplitNum()) {
         float max = Float.parseFloat(rpItemModel.getResult().getRecord().get(0).getBonusAmount());
-        if (rpItemModel.getResult().getSplitNum() == 1) {
+        if (rpItemModel.getResult().getSplitNum() == 1 && rpItemModel.getResult().getIssueTypeId() == 2) {
           var10.setVisibility(View.VISIBLE);
         } else {
           for (int i = 1; i < rpItemModel.getResult().getRecord().size(); i++) {
@@ -291,7 +292,7 @@ public class RpDetailActivityRp extends RpBaseActivity implements AbsListView.On
           }
         }
       }
-      if (var11.getFlag() == 1) {
+      if (var11.getFlag() == 1 && rpItemModel.getResult().getIssueTypeId() == 2) {
         var10.setVisibility(View.VISIBLE);
       }
       return var12.a();
@@ -301,7 +302,7 @@ public class RpDetailActivityRp extends RpBaseActivity implements AbsListView.On
   @Override
   public void onClick(int var1) {
     super.onClick(var1);
-    if (var1 == R.id.iv_back) {
+    if (var1 == ResourcesUtils.getId(RpDetailActivityRp.this, "iv_back")) {
       this.finish();
     }
   }

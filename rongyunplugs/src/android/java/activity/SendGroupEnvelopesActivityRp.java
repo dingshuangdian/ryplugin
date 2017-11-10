@@ -1,5 +1,4 @@
 package cordova.plugin.ismartnet.rongcloud.activity;
-
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,9 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.guoji.tpco.R;
-
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +24,7 @@ import cordova.plugin.ismartnet.rongcloud.utils.DialogDisplay;
 import cordova.plugin.ismartnet.rongcloud.utils.DrawableUtil;
 import cordova.plugin.ismartnet.rongcloud.utils.KeyboardUtil;
 import cordova.plugin.ismartnet.rongcloud.utils.NoDoubleClickUtils;
+import cordova.plugin.ismartnet.rongcloud.utils.ResourcesUtils;
 import cordova.plugin.ismartnet.rongcloud.utils.SharedPreferences;
 import cordova.plugin.ismartnet.rongcloud.utils.StringUtil;
 import cordova.plugin.ismartnet.rongcloud.utils.ToastUtils;
@@ -36,7 +33,6 @@ import cordova.plugin.ismartnet.rongcloud.view.MyTextWatcher;
 import cordova.plugin.ismartnet.rongcloud.view.NoUnderClickableSpan;
 import retrofit2.Call;
 import retrofit2.Response;
-
 /**
  * Created by lvping on 2017/9/14.
  */
@@ -79,23 +75,23 @@ public class SendGroupEnvelopesActivityRp extends RpBaseSendActivity {
   }
 
   public void initView() {
-    actionBarView = (ActionBarView) findViewById(R.id.actionbar);
-    pop_message = (TextView) findViewById(R.id.pop_message);
-    ll_peak_num_layout = (LinearLayout) findViewById(R.id.ll_peak_num_layout);
-    et_peak_num = (EditText) findViewById(R.id.et_peak_num);
+    actionBarView = (ActionBarView) findViewById(ResourcesUtils.getId(this,"actionbar"));
+    pop_message = (TextView) findViewById(ResourcesUtils.getId(this,"pop_message"));
+    ll_peak_num_layout = (LinearLayout) findViewById(ResourcesUtils.getId(this,"ll_peak_num_layout"));
+    et_peak_num = (EditText) findViewById(ResourcesUtils.getId(this,"et_peak_num"));
     this.et_peak_num.setFocusable(true);
     this.et_peak_num.setFocusableInTouchMode(true);
     this.et_peak_num.requestFocus();
     this.et_peak_num.setSelection(this.et_peak_num.getText().length());
     this.et_peak_num.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
-    tv_group_member_num = (TextView) findViewById(R.id.tv_group_member_num);
-    ll_peak_amount_layout = (LinearLayout) findViewById(R.id.ll_peak_amount_layout);
-    tv_peak_amount_icon = (TextView) findViewById(R.id.tv_peak_amount_icon);
-    et_peak_amount = (EditText) findViewById(R.id.et_peak_amount);
-    tv_peak_type = (TextView) findViewById(R.id.tv_peak_type);
-    et_peak_message = (EditText) findViewById(R.id.et_peak_message);
-    tv_amount_for_show = (TextView) findViewById(R.id.tv_amount_for_show);
-    btn_putin = (Button) findViewById(R.id.btn_putin);
+    tv_group_member_num = (TextView) findViewById(ResourcesUtils.getId(this,"tv_group_member_num"));
+    ll_peak_amount_layout = (LinearLayout) findViewById(ResourcesUtils.getId(this,"ll_peak_amount_layout"));
+    tv_peak_amount_icon = (TextView) findViewById(ResourcesUtils.getId(this,"tv_peak_amount_icon"));
+    et_peak_amount = (EditText) findViewById(ResourcesUtils.getId(this,"et_peak_amount"));
+    tv_peak_type = (TextView) findViewById(ResourcesUtils.getId(this,"tv_peak_type"));
+    et_peak_message = (EditText) findViewById(ResourcesUtils.getId(this,"et_peak_message"));
+    tv_amount_for_show = (TextView) findViewById(ResourcesUtils.getId(this,"tv_amount_for_show"));
+    btn_putin = (Button) findViewById(ResourcesUtils.getId(this,"btn_putin"));
     KeyboardUtil.popInputMethod(this.et_peak_num);
     this.setDefaultView();
   }
@@ -139,7 +135,7 @@ public class SendGroupEnvelopesActivityRp extends RpBaseSendActivity {
             SendGroupEnvelopesActivityRp.this.requestInfo();
           } else {
             ToastUtils.show(SendGroupEnvelopesActivityRp.this, "请输入正确金额");
-            ll_peak_amount_layout.setBackgroundResource(R.drawable._bg_white_round);
+            ll_peak_amount_layout.setBackgroundResource(ResourcesUtils.getDrawableId(SendGroupEnvelopesActivityRp.this,"_bg_white_round"));
             DrawableUtil.setClickable(btn_putin, true);
           }
         }
@@ -195,7 +191,7 @@ public class SendGroupEnvelopesActivityRp extends RpBaseSendActivity {
   private void setPeakTypeStyle() {
     String var1 = "";
     if (this.ENVELOPES_TYPE == 2) {
-      DrawableUtil.setDrawableRight(this.getResources().getDrawable(R.drawable._ic_pin), this.tv_peak_amount_icon);
+      DrawableUtil.setDrawableRight(this.getResources().getDrawable(ResourcesUtils.getDrawableId(SendGroupEnvelopesActivityRp.this,"_ic_pin")), this.tv_peak_amount_icon);
       this.tv_peak_amount_icon.setText("总金额");
       var1 = "当前为拼手气红包，改为普通红包";
     } else if (this.ENVELOPES_TYPE == 1) {
@@ -208,7 +204,7 @@ public class SendGroupEnvelopesActivityRp extends RpBaseSendActivity {
     if (var2 >= 1) {
       SpannableString var3 = new SpannableString(var1);
       var3.setSpan(this.peakTypeClick, var2, var1.length(), 33);
-      var3.setSpan(new ForegroundColorSpan(this.getResources().getColor(R.color.blue)), var2, var1.length(), 33);
+      var3.setSpan(new ForegroundColorSpan(this.getResources().getColor(ResourcesUtils.getColorId(SendGroupEnvelopesActivityRp.this,"blue"))), var2, var1.length(), 33);
       this.tv_peak_type.setText(var3);
       this.tv_peak_type.setMovementMethod(LinkMovementMethod.getInstance());
     }
@@ -241,25 +237,25 @@ public class SendGroupEnvelopesActivityRp extends RpBaseSendActivity {
         int var3 = var2.intValue();
         if (var3 == 0) {
           this.showTips("至少需要设置1个红包");
-          this.ll_peak_num_layout.setBackgroundResource(R.drawable._bg_white_round_stroke);
+          this.ll_peak_num_layout.setBackgroundResource(ResourcesUtils.getDrawableId(SendGroupEnvelopesActivityRp.this,"_bg_white_round_stroke"));
           return -1;
         } else if (var3 > this.maxCount) {
           this.showTips("一次最多可发" + this.maxCount + "个红包");
-          this.ll_peak_num_layout.setBackgroundResource(R.drawable._bg_white_round_stroke);
+          this.ll_peak_num_layout.setBackgroundResource(ResourcesUtils.getDrawableId(SendGroupEnvelopesActivityRp.this,"_bg_white_round_stroke"));
           return -1;
         } else {
-          this.ll_peak_num_layout.setBackgroundResource(R.drawable._bg_white_round);
+          this.ll_peak_num_layout.setBackgroundResource(ResourcesUtils.getDrawableId(SendGroupEnvelopesActivityRp.this,"_bg_white_round"));
           this.closeTips();
           return var3;
         }
       } else {
         this.showTips("请输入正确个数");
-        this.ll_peak_num_layout.setBackgroundResource(R.drawable._bg_white_round_stroke);
+        this.ll_peak_num_layout.setBackgroundResource(ResourcesUtils.getDrawableId(SendGroupEnvelopesActivityRp.this,"_bg_white_round_stroke"));
         return -1;
       }
     } else {
       this.closeTips();
-      this.ll_peak_num_layout.setBackgroundResource(R.drawable._bg_white_round);
+      this.ll_peak_num_layout.setBackgroundResource(ResourcesUtils.getDrawableId(SendGroupEnvelopesActivityRp.this,"_bg_white_round"));
       return -1;
     }
   }
@@ -279,20 +275,20 @@ public class SendGroupEnvelopesActivityRp extends RpBaseSendActivity {
         BigDecimal var2 = new BigDecimal(var1);
         float var3 = var2.floatValue();
         if (var3 == 0.0F) {
-          this.ll_peak_amount_layout.setBackgroundResource(R.drawable._bg_white_round);
+          this.ll_peak_amount_layout.setBackgroundResource(ResourcesUtils.getDrawableId(SendGroupEnvelopesActivityRp.this,"_bg_white_round"));
           this.closeTips();
           return -1.0F;
         } else if (var3/var6 < 0.01F) {
           this.showTips("单个红包金额不可低于0.01元");
-          this.ll_peak_amount_layout.setBackgroundResource(R.drawable._bg_white_round_stroke);
+          this.ll_peak_amount_layout.setBackgroundResource(ResourcesUtils.getDrawableId(SendGroupEnvelopesActivityRp.this,"_bg_white_round_stroke"));
           return -1.0F;
         } else if (this.ENVELOPES_TYPE == 2) {
           if (var3/var6> this.maxLimitMoney) {
             this.showTips("单个红包金额不可超过" + StringUtil.formatMoney((double) this.maxLimitMoney) + "元");
-            this.ll_peak_amount_layout.setBackgroundResource(R.drawable._bg_white_round_stroke);
+            this.ll_peak_amount_layout.setBackgroundResource(ResourcesUtils.getDrawableId(SendGroupEnvelopesActivityRp.this,"_bg_white_round_stroke"));
             return -1.0F;
           } else {
-            this.ll_peak_amount_layout.setBackgroundResource(R.drawable._bg_white_round);
+            this.ll_peak_amount_layout.setBackgroundResource(ResourcesUtils.getDrawableId(SendGroupEnvelopesActivityRp.this,"_bg_white_round"));
             this.closeTips();
             return var3;
           }
@@ -303,20 +299,20 @@ public class SendGroupEnvelopesActivityRp extends RpBaseSendActivity {
             var5 = StringUtil.formatMoneyDouble(var4);
             if (var3 > this.maxLimitMoney) {
               this.showTips("单个红包金额不可超过" + this.maxLimitMoney + "元");
-              this.ll_peak_amount_layout.setBackgroundResource(R.drawable._bg_white_round_stroke);
+              this.ll_peak_amount_layout.setBackgroundResource(ResourcesUtils.getDrawableId(SendGroupEnvelopesActivityRp.this,"_bg_white_round_stroke"));
               return -1.0F;
             } else {
-              this.ll_peak_amount_layout.setBackgroundResource(R.drawable._bg_white_round);
+              this.ll_peak_amount_layout.setBackgroundResource(ResourcesUtils.getDrawableId(SendGroupEnvelopesActivityRp.this,"_bg_white_round"));
               this.closeTips();
               return var3;
             }
           } else if (var3 > this.maxLimitMoney) {
             this.showTips("单个红包金额不可超过" + this.maxLimitMoney + "元");
-            this.ll_peak_amount_layout.setBackgroundResource(R.drawable._bg_white_round_stroke);
+            this.ll_peak_amount_layout.setBackgroundResource(ResourcesUtils.getDrawableId(SendGroupEnvelopesActivityRp.this,"_bg_white_round_stroke"));
             return -1.0F;
           } else {
             this.closeTips();
-            this.ll_peak_amount_layout.setBackgroundResource(R.drawable._bg_white_round);
+            this.ll_peak_amount_layout.setBackgroundResource(ResourcesUtils.getDrawableId(SendGroupEnvelopesActivityRp.this,"_bg_white_round"));
             return var3;
           }
         } else {
@@ -324,12 +320,12 @@ public class SendGroupEnvelopesActivityRp extends RpBaseSendActivity {
         }
       } else {
         this.showTips("请输入正确金额");
-        this.ll_peak_amount_layout.setBackgroundResource(R.drawable._bg_white_round_stroke);
+        this.ll_peak_amount_layout.setBackgroundResource(ResourcesUtils.getDrawableId(SendGroupEnvelopesActivityRp.this,"_bg_white_round_stroke"));
         return -1.0F;
       }
     } else {
       this.closeTips();
-      this.ll_peak_amount_layout.setBackgroundResource(R.drawable._bg_white_round);
+      this.ll_peak_amount_layout.setBackgroundResource(ResourcesUtils.getDrawableId(SendGroupEnvelopesActivityRp.this,"_bg_white_round"));
       return -1.0F;
     }
   }
@@ -396,7 +392,7 @@ public class SendGroupEnvelopesActivityRp extends RpBaseSendActivity {
     String num = SharedPreferences.getInstance(SendGroupEnvelopesActivityRp.this).getStringValue(Api.GROUPNUM);
     if (!StringUtil.isEmptyAndNull(num)) {
       SendGroupEnvelopesActivityRp.this.tv_group_member_num.setVisibility(View.VISIBLE);
-      String var2 = SendGroupEnvelopesActivityRp.this.getResources().getString(R.string.group_number);
+      String var2 = SendGroupEnvelopesActivityRp.this.getResources().getString(ResourcesUtils.getStringId(SendGroupEnvelopesActivityRp.this,"group_number"));
       String var3 = String.format(var2, new Object[]{Integer.valueOf(num)});
       SendGroupEnvelopesActivityRp.this.tv_group_member_num.setText(var3);
     }
@@ -431,6 +427,6 @@ public class SendGroupEnvelopesActivityRp extends RpBaseSendActivity {
 
   @Override
   public int getLayoutId() {
-    return R.layout._activity_send_group_peak;
+    return ResourcesUtils.getLayoutId(SendGroupEnvelopesActivityRp.this,"_activity_send_group_peak");
   }
 }

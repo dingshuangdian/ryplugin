@@ -3,12 +3,11 @@ package cordova.plugin.ismartnet.rongcloud.view;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.guoji.tpco.R;
+import cordova.plugin.ismartnet.rongcloud.utils.ResourcesUtils;
 
 /**
  * Created by lvping on 2017/10/11.
@@ -32,13 +31,13 @@ public class DialogWithYesOrNoUtils {
     alterDialog.setMessage(titleInfo);
     alterDialog.setCancelable(true);
 
-    alterDialog.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+    alterDialog.setPositiveButton(ResourcesUtils.getStringId(context,"confirm"), new DialogInterface.OnClickListener() {
       @Override
       public void onClick(DialogInterface dialog, int which) {
         callBack.executeEvent();
       }
     });
-    alterDialog.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+    alterDialog.setNegativeButton(ResourcesUtils.getStringId(context,"cancel"), new DialogInterface.OnClickListener() {
       @Override
       public void onClick(DialogInterface dialog, int which) {
         dialog.cancel();
@@ -57,9 +56,9 @@ public interface DialogCallBack {
     final EditText et_search;
     AlertDialog.Builder dialog = new AlertDialog.Builder(context);
     LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.dialog_view, null);
+    LinearLayout layout = (LinearLayout) inflater.inflate(ResourcesUtils.getLayoutId(context,"dialog_view"), null);
     dialog.setView(layout);
-    et_search = (EditText) layout.findViewById(R.id.searchC);
+    et_search = (EditText) layout.findViewById(ResourcesUtils.getId(context,"searchC"));
     et_search.setHint(hintText);
     dialog.setPositiveButton(OKText, new DialogInterface.OnClickListener() {
       public void onClick(DialogInterface dialog, int which) {
@@ -68,7 +67,7 @@ public interface DialogCallBack {
       }
     });
 
-    dialog.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+    dialog.setNegativeButton(ResourcesUtils.getStringId(context,"cancel"), new DialogInterface.OnClickListener() {
       public void onClick(DialogInterface dialog, int which) {
 
       }

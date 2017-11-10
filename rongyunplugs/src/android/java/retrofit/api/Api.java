@@ -26,17 +26,12 @@ public class Api {
   public static final String ADMIN="admin";
   public static final String SHOWANNOUNCEMENT="showAnnouncement";
   public static final String SHOWREDPACKAGE="showRedPackage";
+  public static final boolean DEBUG = Boolean.parseBoolean("true");
 
 
 
 
 
   public static class API {
-    //群信息
-    public static final String GROUPINFO = "CRUD-Q-TP-Task-getGroupInfo.do";
-    //群成员信息
-    public static final String GROUPCHAT = "CRUD-Q-TP-Task-groupChat.do?";
-    //用户信息
-    public static final String USERINFO = "CRUD-Q-TP-Task-getUserInfo.do?";
   }
 }

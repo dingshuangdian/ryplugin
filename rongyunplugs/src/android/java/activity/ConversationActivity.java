@@ -4,10 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,36 +12,25 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-
-import com.guoji.tpco.MainActivity;
-import com.guoji.tpco.R;
-
 import java.util.ArrayList;
-
 import java.util.HashMap;
-
 import java.util.List;
 import java.util.Locale;
-
-import cordova.plugin.ismartnet.rongcloud.App;
 import cordova.plugin.ismartnet.rongcloud.base.BaseActivity;
 import cordova.plugin.ismartnet.rongcloud.bean.GroupMsg;
 import cordova.plugin.ismartnet.rongcloud.retrofit.HttpUtil;
 import cordova.plugin.ismartnet.rongcloud.retrofit.api.Api;
 import cordova.plugin.ismartnet.rongcloud.retrofit.callback.MyCallBack;
-import cordova.plugin.ismartnet.rongcloud.utils.LoadDialog;
 import cordova.plugin.ismartnet.rongcloud.utils.LoadingDialog;
+import cordova.plugin.ismartnet.rongcloud.utils.ResourcesUtils;
 import cordova.plugin.ismartnet.rongcloud.utils.RongGenerate;
 import cordova.plugin.ismartnet.rongcloud.utils.SharedPreferences;
 import cordova.plugin.ismartnet.rongcloud.utils.StringUtil;
 import cordova.plugin.ismartnet.rongcloud.utils.ToastUtils;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.fragment.ConversationFragment;
-import io.rong.imkit.userInfoCache.RongUserInfoManager;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
-import io.rong.imlib.model.Discussion;
-import io.rong.imlib.model.PublicServiceProfile;
 import io.rong.imlib.model.UserInfo;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -59,7 +45,7 @@ import retrofit2.Response;
  * 2，加载会话页面
  * 3，push 和 通知 判断
  */
-public class ConversationActivity extends BaseActivity implements View.OnClickListener {
+public class ConversationActivity extends BaseActivity{
   private String TAG = ConversationActivity.class.getSimpleName();
   /**
    * 群id
@@ -74,7 +60,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.con_layout);
+    setContentView(ResourcesUtils.getLayoutId(this,"con_layout"));
 
     mDialog = new LoadingDialog(this);
 
@@ -90,12 +76,18 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
     title = intent.getData().getQueryParameter("title");
     Log.e("Conversation.title", title);
     if (mConversationType.equals(Conversation.ConversationType.GROUP)) {
-      mRightButton.setBackground(getResources().getDrawable(R.drawable.icon2_menu));
+      mRightButton.setBackground(getResources().getDrawable(ResourcesUtils.getDrawableId(this,"icon2_menu")));
     } else {
       mRightButton.setVisibility(View.GONE);
       mRightButton.setClickable(false);
     }
-    mRightButton.setOnClickListener(this);
+    mRightButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        enterSettingActivity();
+
+      }
+    });
     isPushMessage(intent);
     setGroupActionBar();
     RongIM.getInstance().setGroupMembersProvider(new RongIM.IGroupMembersProvider() {
@@ -118,7 +110,6 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
     groupMsgCall.enqueue(new MyCallBack<GroupMsg>() {
       @Override
       public void onSuccess(Response<GroupMsg> response) {
-        Log.e("GroupMsg.response", response.toString());
         List<UserInfo> userInfos = new ArrayList<>();
         if (response.body().getResult() != null) {
           for (GroupMsg.ResultBean groupMember : response.body().getResult()) {
@@ -146,7 +137,6 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
    * 判断是否是 Push 消息，判断是否需要做 connect 操作
    */
   private void isPushMessage(Intent intent) {
-    Log.e("ConversationActivity", "ConversationActivity执行1");
     if (intent == null || intent.getData() == null)
       return;
     //push
@@ -180,13 +170,10 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
         new android.os.Handler().postDelayed(new Runnable() {
           @Override
           public void run() {
-            Log.e("ConversationActivity", "ConversationActivity执行6");
             enterActivity();
           }
         }, 300);
       } else {
-        Log.e("putong", "普通执行");
-        Log.e("ConversationActivity", "ConversationActivity执行2");
         enterFragment(mConversationType, mTargetId);
       }
     }
@@ -235,8 +222,6 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
    * @param mTargetId         会话 Id
    */
   private void enterFragment(Conversation.ConversationType mConversationType, String mTargetId) {
-    Log.e("ConversationActivity", "ConversationActivity执行11111");
-
     fragment = new ConversationFragment();
 
     Uri uri = Uri.parse("rong://" + getApplicationInfo().packageName).buildUpon()
@@ -245,7 +230,7 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
     fragment.setUri(uri);
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
     //xxx 为你要加载的 id
-    transaction.add(R.id.rong_content, fragment);
+    transaction.add(ResourcesUtils.getId(this,"rong_content"), fragment);
     transaction.commitAllowingStateLoss();
   }
 
@@ -265,7 +250,6 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
     } else {
       setTitle("聊天");
     }
-
   }*/
 
   /**
@@ -323,12 +307,6 @@ public class ConversationActivity extends BaseActivity implements View.OnClickLi
       }
     });
   }
-
-  @Override
-  public void onClick(View v) {
-    enterSettingActivity();
-  }
-
   @Override
   protected void onPause() {
     super.onPause();

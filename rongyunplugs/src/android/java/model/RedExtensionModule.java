@@ -1,11 +1,8 @@
 package cordova.plugin.ismartnet.rongcloud.model;
 
 import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import cordova.plugin.ismartnet.rongcloud.bean.CurrentUser;
 import cordova.plugin.ismartnet.rongcloud.msg.RedPacketMessage;
 import cordova.plugin.ismartnet.rongcloud.msg.RedPacketMessageProvider;
 import cordova.plugin.ismartnet.rongcloud.msg.RedPacketOpenMessageProvider;
@@ -17,7 +14,6 @@ import io.rong.imkit.RongExtension;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.emoticon.IEmoticonTab;
 import io.rong.imkit.plugin.IPluginModule;
-import io.rong.imkit.widget.provider.FilePlugin;
 import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.Message;
 

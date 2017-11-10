@@ -14,11 +14,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
-
-
-import com.guoji.tpco.R;
-
 import cordova.plugin.ismartnet.rongcloud.App;
+import cordova.plugin.ismartnet.rongcloud.utils.ResourcesUtils;
 
 public abstract class BaseActivity extends FragmentActivity {
 
@@ -34,18 +31,18 @@ public abstract class BaseActivity extends FragmentActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    super.setContentView(R.layout.layout_base);
+    super.setContentView(ResourcesUtils.getLayoutId(this,"layout_base"));
     setVolumeControlStream(AudioManager.STREAM_MUSIC);// 使得音量键控制媒体声音
     mContext = this;
 
     // 初始化公共头部
-    mContentView = (ViewFlipper) super.findViewById(R.id.layout_container);
-    mHeadLayout = (LinearLayout) super.findViewById(R.id.layout_head);
-    mHeadRightText = (TextView) findViewById(R.id.text_right);
-    mBtnLeft = (Button) super.findViewById(R.id.btn_left);
-    mBtnRight = (Button) super.findViewById(R.id.btn_right);
-    mTitle = (TextView) super.findViewById(R.id.tv_title);
-    mBtnBackDrawable = getResources().getDrawable(R.drawable.ac_back_icon);
+    mContentView = (ViewFlipper) super.findViewById(ResourcesUtils.getId(this,"layout_container"));
+    mHeadLayout = (LinearLayout) super.findViewById(ResourcesUtils.getId(this,"layout_head"));
+    mHeadRightText = (TextView) findViewById(ResourcesUtils.getId(this,"text_right"));
+    mBtnLeft = (Button) super.findViewById(ResourcesUtils.getId(this,"btn_left"));
+    mBtnRight = (Button) super.findViewById(ResourcesUtils.getId(this,"btn_right"));
+    mTitle = (TextView) super.findViewById(ResourcesUtils.getId(this,"tv_title"));
+    mBtnBackDrawable = getResources().getDrawable(ResourcesUtils.getDrawableId(this,"ac_back_icon"));
     mBtnBackDrawable.setBounds(0, 0, mBtnBackDrawable.getMinimumWidth(),
       mBtnBackDrawable.getMinimumHeight());
 

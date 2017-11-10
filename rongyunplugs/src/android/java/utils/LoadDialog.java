@@ -10,8 +10,6 @@ import android.view.WindowManager;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
-import com.guoji.tpco.R;
-
 
 public class LoadDialog extends Dialog {
 
@@ -43,10 +41,10 @@ public class LoadDialog extends Dialog {
         this.canNotCancel = canNotCancel;
         this.tipMsg = tipMsg;
         this.getContext().setTheme(android.R.style.Theme_InputMethod);
-        setContentView(R.layout.layout_dialog_loading);
+        setContentView(ResourcesUtils.getLayoutId(ctx,"layout_dialog_loading"));
 
         if (!TextUtils.isEmpty(this.tipMsg)) {
-            mShowMessage = (TextView) findViewById(R.id.show_message);
+            mShowMessage = (TextView) findViewById(ResourcesUtils.getId(ctx,"show_message"));
             mShowMessage.setText(this.tipMsg);
         }
 

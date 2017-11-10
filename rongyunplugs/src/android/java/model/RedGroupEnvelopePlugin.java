@@ -1,21 +1,16 @@
 package cordova.plugin.ismartnet.rongcloud.model;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-
-
-import com.guoji.tpco.R;
-
 import cordova.plugin.ismartnet.rongcloud.activity.SendGroupEnvelopesActivityRp;
 import cordova.plugin.ismartnet.rongcloud.bean.CurrentUser;
+import cordova.plugin.ismartnet.rongcloud.utils.ResourcesUtils;
 import io.rong.imkit.RongExtension;
 import io.rong.imkit.plugin.IPluginModule;
 import io.rong.imlib.model.Conversation;
-
 /**
  * Created by lvping on 2017/9/15.
  */
@@ -28,7 +23,7 @@ public class RedGroupEnvelopePlugin implements IPluginModule{
   }
   @Override
   public Drawable obtainDrawable(Context context) {
-  return ContextCompat.getDrawable(context, R.drawable.red_package_selector);
+  return ContextCompat.getDrawable(context, ResourcesUtils.getDrawableId(context,"red_package_selector"));
   }
 
   @Override
@@ -42,13 +37,9 @@ public class RedGroupEnvelopePlugin implements IPluginModule{
     this.targetId = rongExtension.getTargetId();
     Intent var3 = new Intent(rongExtension.getContext(), SendGroupEnvelopesActivityRp.class);
     var3.putExtra("TargetId", rongExtension.getTargetId());
-    Log.e("TargetId",rongExtension.getTargetId());
     var3.putExtra("user_id", CurrentUser.getUserId());
-    Log.e("user_id",CurrentUser.getUserId());
     var3.putExtra("user_name", CurrentUser.getName());
-    Log.e("user_name",CurrentUser.getName());
     var3.putExtra("user_icon", CurrentUser.getUserIcon());
-    Log.e("user_icon",CurrentUser.getUserIcon());
     rongExtension.startActivityForPluginResult(var3, 51, this);
 
   }
@@ -59,7 +50,7 @@ public class RedGroupEnvelopePlugin implements IPluginModule{
       this.sendRpMessage(intent);
     }*/
   }
-/*  private void sendRpMessage(Intent var1) {
+/*private void sendRpMessage(Intent var1) {
     String var2 = var1.getStringExtra("envelopesID");
     String var3 = var1.getStringExtra("envelopeMessage");
     String var4 = var1.getStringExtra("envelopeName");

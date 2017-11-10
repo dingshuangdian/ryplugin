@@ -22,8 +22,7 @@ import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.guoji.tpco.R;
-
+import cordova.plugin.ismartnet.rongcloud.utils.ResourcesUtils;
 
 public class CircleImageView extends ImageView {
   private static final ScaleType SCALE_TYPE;
@@ -53,9 +52,11 @@ public class CircleImageView extends ImageView {
   private boolean mSetupPending;
   private boolean mBorderOverlay;
   private boolean mDisableCircularTransformation;
+  private Context mContext;
 
   public CircleImageView(Context var1) {
     super(var1);
+    this.mContext=var1;
     this.mDrawableRect = new RectF();
     this.mBorderRect = new RectF();
     this.mShaderMatrix = new Matrix();
@@ -80,14 +81,14 @@ public class CircleImageView extends ImageView {
     this.mBitmapPaint = new Paint();
     this.mBorderPaint = new Paint();
     this.mFillPaint = new Paint();
-    this.mBorderColor = R.color.white;
+    this.mBorderColor = ResourcesUtils.getColorId(var1,"white");
     this.mBorderWidth = 0;
     this.mFillColor = 0;
-    TypedArray var4 = var1.obtainStyledAttributes(var2, R.styleable.Ry_CircleImageView, var3, 0);
-    this.mBorderWidth = var4.getDimensionPixelSize(R.styleable.Ry_CircleImageView_ry_civ_border_width, 0);
-    this.mBorderColor = var4.getColor(R.styleable.Ry_CircleImageView_ry_civ_border_color, getResources().getColor(R.color.white));
-    this.mBorderOverlay = var4.getBoolean(R.styleable.Ry_CircleImageView_ry_civ_border_overlay, false);
-    this.mFillColor = var4.getColor(R.styleable.Ry_CircleImageView_ry_civ_fill_color, 0);
+    TypedArray var4 = var1.obtainStyledAttributes(var2, ResourcesUtils.getStyleableArray(var1,"Ry_CircleImageView"), var3, 0);
+    this.mBorderWidth = var4.getDimensionPixelSize(ResourcesUtils.getStyleable(var1,"Ry_CircleImageView_ry_civ_border_width"), 0);
+    this.mBorderColor = var4.getColor(ResourcesUtils.getStyleable(var1,"Ry_CircleImageView_ry_civ_border_color"), getResources().getColor(ResourcesUtils.getColorId(var1,"white")));
+    this.mBorderOverlay = var4.getBoolean(ResourcesUtils.getStyleable(var1,"Ry_CircleImageView_ry_civ_border_overlay"), false);
+    this.mFillColor = var4.getColor(ResourcesUtils.getStyleable(var1,"Ry_CircleImageView_ry_civ_fill_color"), 0);
     var4.recycle();
     this.init();
   }

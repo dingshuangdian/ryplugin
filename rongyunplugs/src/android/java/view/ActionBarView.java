@@ -12,9 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.guoji.tpco.R;
-
+import cordova.plugin.ismartnet.rongcloud.utils.ResourcesUtils;
 
 /**
  * Created by lvping on 2017/9/11.
@@ -43,23 +41,24 @@ public class ActionBarView extends LinearLayout {
   }
 
   private void initView(AttributeSet var1, int var2) {
-    View var3 = LayoutInflater.from(this.context).inflate(R.layout._layout_actionbar, this);
-    this.layout = (FrameLayout)var3.findViewById(R.id.layout);
-    this.tv_content = (TextView)var3.findViewById(R.id.tv_content);
-    this.iv_back = (ImageView)var3.findViewById(R.id.iv_back);
-    TypedArray var4 = this.context.getTheme().obtainStyledAttributes(var1, R.styleable.ActionBarView, var2, 0);
+    View var3 = LayoutInflater.from(this.context).inflate(ResourcesUtils.getLayoutId(context,"_layout_actionbar"), this);
+    this.layout = (FrameLayout)var3.findViewById(ResourcesUtils.getId(context,"layout"));
+    this.tv_content = (TextView)var3.findViewById(ResourcesUtils.getId(context,"tv_content"));
+    this.iv_back = (ImageView)var3.findViewById(ResourcesUtils.getId(context,"iv_back"));
+
+    TypedArray var4 = this.context.getTheme().obtainStyledAttributes(var1, ResourcesUtils.getStyleableArray(context,"ActionBarView"), var2, 0);
     int var5 = var4.getIndexCount();
 
     for(int var6 = 0; var6 < var5; ++var6) {
       int var7 = var4.getIndex(var6);
-      if(var7 == R.styleable.ActionBarView_content) {
+      if(var7 == ResourcesUtils.getStyleable(context,"ActionBarView_content")) {
         this.tv_content.setText(var4.getString(var7));
-      } else if(var7 == R.styleable.ActionBarView_bankground) {
+      } else if(var7 == ResourcesUtils.getStyleable(context,"ActionBarView_bankground")) {
         int var8 = var4.getColor(var7, 0);
         this.layout.setBackgroundColor(var8);
-      } else if(var7 == R.styleable.ActionBarView_isBackFinish) {
+      } else if(var7 ==  ResourcesUtils.getStyleable(context,"ActionBarView_isBackFinish")) {
         this.isBackFinish = var4.getBoolean(var7, true);
-      } else if(var7 == R.styleable.ActionBarView_leftIcon) {
+      } else if(var7 ==  ResourcesUtils.getStyleable(context,"ActionBarView_leftIcon")) {
         Drawable var9 = var4.getDrawable(var7);
         this.iv_back.setBackgroundDrawable(var9);
       }

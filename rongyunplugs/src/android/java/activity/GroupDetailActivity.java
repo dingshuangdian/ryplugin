@@ -5,12 +5,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
-
-import com.guoji.tpco.R;
-
 import java.util.HashMap;
 import java.util.List;
-
 import cordova.plugin.ismartnet.rongcloud.adapter.GridAdapter;
 import cordova.plugin.ismartnet.rongcloud.base.BaseActivity;
 import cordova.plugin.ismartnet.rongcloud.bean.Group;
@@ -19,6 +15,7 @@ import cordova.plugin.ismartnet.rongcloud.retrofit.HttpUtil;
 import cordova.plugin.ismartnet.rongcloud.retrofit.api.Api;
 import cordova.plugin.ismartnet.rongcloud.retrofit.callback.MyCallBack;
 import cordova.plugin.ismartnet.rongcloud.utils.LoadDialog;
+import cordova.plugin.ismartnet.rongcloud.utils.ResourcesUtils;
 import cordova.plugin.ismartnet.rongcloud.utils.SharedPreferences;
 import cordova.plugin.ismartnet.rongcloud.utils.ToastUtils;
 import cordova.plugin.ismartnet.rongcloud.view.DemoGridView;
@@ -30,7 +27,7 @@ import retrofit2.Response;
  * Created by lvping on 2017/10/10.
  */
 
-public class GroupDetailActivity extends BaseActivity implements View.OnClickListener {
+public class GroupDetailActivity extends BaseActivity {
   private DemoGridView mGridView;
   private List<GroupMsg.ResultBean> mGroupMember;
   private Group mGroup;
@@ -44,9 +41,10 @@ public class GroupDetailActivity extends BaseActivity implements View.OnClickLis
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_detail_group);
+    //setContentView(R.layout.activity_detail_group);
+    setContentView(ResourcesUtils.getLayoutId(this,"activity_detail_group"));
     initViews();
-    setTitle(R.string.group_info);
+    setTitle(ResourcesUtils.getStringId(this,"group_info"));
     //群组会话界面点进群组详情
     fromConversationId = getIntent().getStringExtra("TargetId");
     mConversationType = (Conversation.ConversationType) getIntent().getSerializableExtra("conversationType");
@@ -62,7 +60,7 @@ public class GroupDetailActivity extends BaseActivity implements View.OnClickLis
 
   private void initGroupMemberData() {
     if (mGroupMember != null && mGroupMember.size() > 0) {
-      setTitle(getString(R.string.group_info) + "(" + mGroupMember.size() + ")");
+      setTitle(getString(ResourcesUtils.getStringId(this,"group_info")) + "(" + mGroupMember.size() + ")");
       //mTextViewMemberSize.setText(getString(R.string.group_member_size) + "(" + mGroupMember.size() + ")");
       mGridView.setAdapter(new GridAdapter(mContext, mGroupMember));
     } else {
@@ -121,27 +119,22 @@ public class GroupDetailActivity extends BaseActivity implements View.OnClickLis
 
   private void initViews() {
     //mTextViewMemberSize = (TextView) findViewById(R.id.group_member_size);
-    mGridView = (DemoGridView) findViewById(R.id.gridview);
-    mGroupNotice = (LinearLayout) findViewById(R.id.group_announcement);
-    group_announcement = (LinearLayout) findViewById(R.id.group_announcement);
+    mGridView = (DemoGridView) findViewById(ResourcesUtils.getId(this,"gridview"));
+    mGroupNotice = (LinearLayout) findViewById(ResourcesUtils.getId(this,"group_announcement"));
+    group_announcement = (LinearLayout) findViewById(ResourcesUtils.getId(this,"group_announcement"));
     if (SharedPreferences.getInstance(mContext).getBooleanValue(Api.SHOWANNOUNCEMENT)) {
       group_announcement.setVisibility(View.VISIBLE);
     } else {
       group_announcement.setVisibility(View.GONE);
     }
-    mGroupNotice.setOnClickListener(this);
-  }
-
-  @Override
-  public void onClick(View v) {
-    switch (v.getId()) {
-      case R.id.group_announcement:
+    mGroupNotice.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
         Intent tempIntent = new Intent(mContext, GroupNoticeActivity.class);
         tempIntent.putExtra("conversationType", Conversation.ConversationType.GROUP.getValue());
         tempIntent.putExtra("targetId", fromConversationId);
         startActivity(tempIntent);
-        break;
-    }
-
+      }
+    });
   }
 }

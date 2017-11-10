@@ -6,7 +6,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.guoji.tpco.R;
 
 
 /**
@@ -19,8 +18,8 @@ public class LoadingDialog extends Dialog {
 
     public LoadingDialog(Context context) {
 
-        super(context, R.style.WinDialog);
-        setContentView(R.layout.ui_dialog_loading);
+        super(context, ResourcesUtils.getStyleId(context,"WinDialog"));
+        setContentView(ResourcesUtils.getLayoutId(context,"ui_dialog_loading"));
         mTextView = (TextView) findViewById(android.R.id.message);
     }
 

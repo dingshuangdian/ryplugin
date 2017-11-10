@@ -1,5 +1,4 @@
 package cordova.plugin.ismartnet.rongcloud;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +7,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
-
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -16,14 +14,10 @@ import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import cordova.plugin.chief.push.MobilePhoneType;
-
 import cordova.plugin.ismartnet.rongcloud.bean.GroupMsg;
 import cordova.plugin.ismartnet.rongcloud.bean.Permiss;
 import cordova.plugin.ismartnet.rongcloud.dao.PushMessageClass;
@@ -46,7 +40,6 @@ import io.rong.imlib.model.UserInfo;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.converter.gson.GsonConverterFactory;
-
 /**
  * This class echoes a string called from JavaScript.
  */
@@ -92,9 +85,7 @@ public class RongCloudNav extends CordovaPlugin {
     }
 
     if (action.equals("pushConversionView")) {
-     
           getGroupChat(args, callbackContext);
- 
 
     }
     if (action.equals("startWithHost")) {
@@ -111,7 +102,7 @@ public class RongCloudNav extends CordovaPlugin {
       @Override
       public void run() {
         try {
-          phoneType = MobilePhoneType.getType(cordovaActivity);
+          phoneType = "SYS_JiGUANG";
 
           Method method = RongCloudNav.class.getDeclaredMethod(action, JSONArray.class, CallbackContext.class, String.class, CordovaInterface.class);
           method.invoke(RongCloudNav.this, args, callbackContext, phoneType, cordova);
@@ -190,7 +181,7 @@ public class RongCloudNav extends CordovaPlugin {
           @Override
           public void run() {
             getMyUserInfo();
-            getGroupMsg();
+           getGroupMsg();
           }
         }, 800);
       }
@@ -310,7 +301,6 @@ public class RongCloudNav extends CordovaPlugin {
       }
     });
   }
-
   /**
    * 启动群聊界面
    *
@@ -325,17 +315,12 @@ public class RongCloudNav extends CordovaPlugin {
       String conversationTitle = jsonObject.optString("conversationTitle");
       getGroupMembers(targetId);
       getPermiss(targetId);
-      Uri uri = Uri.parse("rong://" + cordovaActivity.getApplicationInfo().packageName).buildUpon().appendPath("conversation")
-        .appendPath(Conversation.ConversationType.GROUP.getName()).appendQueryParameter("targetId", targetId).appendQueryParameter("title", conversationTitle).build();
-      Intent intent = new Intent(Intent.ACTION_VIEW);
-      intent.setData(uri);
-      cordovaActivity.startActivity(intent);
+      PushMessageClass.OpenChat(cordovaActivity, instance, cordovaWebView,targetId,conversationTitle);
       //RongIM.getInstance().startConversation(mContext, Conversation.ConversationType.GROUP, targetId, conversationTitle);
     } catch (JSONException e) {
       e.printStackTrace();
     }
   }
-
   /**
    * 接收通知
    *
@@ -359,7 +344,6 @@ public class RongCloudNav extends CordovaPlugin {
     PushMessageClass.openReceiveNotice(cordovaActivity, instance, cordovaWebView, extrasJson);
 
   }
-
   @Override
   public void onDestroy() {
     super.onDestroy();
@@ -367,7 +351,6 @@ public class RongCloudNav extends CordovaPlugin {
     instance = null;
     RongExtensionManager.getInstance().unregisterExtensionModule(new RedExtensionModule(cordovaActivity));
   }
-
   @Override
   public void onPause(boolean multitasking) {
     super.onPause(multitasking);

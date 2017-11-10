@@ -1,5 +1,4 @@
 package cordova.plugin.ismartnet.rongcloud.utils;
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -7,13 +6,11 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Environment;
 import android.text.TextUtils;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-
 import io.rong.imlib.model.UserInfo;
 
 /**
@@ -21,7 +18,7 @@ import io.rong.imlib.model.UserInfo;
  */
 
 public class RongGenerate {
-  private static String SAVEADDRESS = "/data/data/com.guoji.tpco/temp";
+  private static String SAVEADDRESS = "/data/data/temp";
   private static final String SCHEMA = "file://";
 
 

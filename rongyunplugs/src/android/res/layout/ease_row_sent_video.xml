@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<io.rong.imkit.widget.RCMessageFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/rcf"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+
+  <io.rong.imkit.widget.AsyncImageView
+    android:id="@+id/chatting_content_iv"
+    android:layout_width="130dp"
+    android:layout_height="145dp"
+    android:scaleType="centerCrop"
+    app:RCMask="true"
+    app:RCMinShortSideSize="120dp" />
+
+  <RelativeLayout
+    android:layout_width="130dp"
+    android:layout_height="145dp">
+
+    <LinearLayout
+      android:id="@+id/chatting_video_data_area"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:gravity="bottom"
+      android:orientation="horizontal">
+
+      <TextView
+        android:id="@+id/chatting_size_iv"
+        android:layout_width="0.0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_weight="1.0"
+        android:textColor="@android:color/white"
+        android:textSize="12.0sp"
+        android:visibility="visible" />
+
+      <TextView
+        android:id="@+id/chatting_length"
+        android:layout_width="0.0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:gravity="right"
+        android:textColor="@android:color/white"
+        android:textSize="12.0sp" />
+    </LinearLayout>
+
+    <ImageView
+      android:id="@+id/chatting_status_btn"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:background="@drawable/ease_video_play_btn_small_nor"
+      android:clickable="false" />
+
+    <RelativeLayout
+      android:id="@+id/rl"
+      android:layout_width="45dp"
+      android:layout_height="45dp"
+      android:layout_centerInParent="true"
+      android:background="#75000000">
+
+      <TextView
+        android:id="@id/rc_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@android:color/white"
+        android:textSize="13sp" />
+    </RelativeLayout>
+  </RelativeLayout>
+</io.rong.imkit.widget.RCMessageFrameLayout>

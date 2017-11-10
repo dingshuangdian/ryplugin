@@ -12,33 +12,33 @@
 			</feature>
 		</config-file>
 		<config-file parent="/*" target="AndroidManifest.xml">
-			<!--权限配置-->
-			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 			<uses-permission android:name="android.permission.INTERNET" />
-			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-			<!-- 获取机型信息权限 -->
-			<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-			<uses-permission android:name="android.permission.GET_TASKS" />
-			<uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
-			<!-- 查看 Wi-Fi 状态 -->
-			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-			<!-- 查看网络状态 -->
-			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-			<uses-permission android:name="android.permission.CAMERA" />
-			<!-- 录音 -->
-			<uses-permission android:name="android.permission.RECORD_AUDIO" />
-			<!-- 控制振动器 -->
-			<uses-permission android:name="android.permission.VIBRATE" />
-			<!-- 防止设备休眠 -->
-			<uses-permission android:name="android.permission.WAKE_LOCK" />
-			<uses-permission android:name="android.permission.WRITE_SETTINGS" />
-			<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-			<uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
-			<!-- 获取联系人信息，demo中演示发送通讯录消息 -->
-			<uses-permission android:name="android.permission.READ_CONTACTS" />
-			<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-			<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-			<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+  <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+  <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+  <uses-permission android:name="android.permission.READ_CONTACTS" />
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.VIBRATE" />
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.RECORD_AUDIO" />
+  <uses-permission android:name="android.permission.CAMERA" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.GET_TASKS" />
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+  <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+  <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+  <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+  <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+  <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+  <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 			<supports-screens
 			android:anyDensity="true"
 			android:largeScreens="true"
@@ -65,6 +65,15 @@
           android:scheme="rong" />
 				</intent-filter>
 			</activity>
+			<activity
+      android:name="cordova.plugin.ismartnet.rongcloud.activity.RecorderVideoActivity"
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="stateAlwaysHidden" />
+    <activity
+      android:name="cordova.plugin.ismartnet.rongcloud.activity.VideoActivity"
+      android:configChanges="orientation|keyboardHidden|screenSize"
+      android:screenOrientation="portrait"
+      android:theme="@style/Theme.AppCompat.Translucent" />
 			
 			  <receiver
       android:name="cordova.plugin.ismartnet.rongcloud.receiver.SealNotificationReceiver"
@@ -80,15 +89,15 @@
 			<meta-data
       android:name="com.amap.api.v2.apikey"
       android:value="e09af6a2b26c02086e9216bd07c960ae" />
-			<provider
-      android:name="android.support.v4.content.FileProvider"
+	    <provider
+      android:name="cordova.plugin.ismartnet.rongcloud.inter.RyFileProvider"
       android:authorities="$PACKAGE_NAME.FileProvider"
       android:exported="false"
       android:grantUriPermissions="true">
-				<meta-data
+      <meta-data
         android:name="android.support.FILE_PROVIDER_PATHS"
         android:resource="@xml/rc_file_path" />
-			</provider>
+    </provider>
 			<!--发红包界面-->
 			<activity android:name="cordova.plugin.ismartnet.rongcloud.activity.SendGroupEnvelopesActivityRp"></activity>
 
@@ -110,6 +119,9 @@
 		
 		<source-file src="src/android/java/activity/GroupDetailActivity.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/activity" />
 		<source-file src="src/android/java/activity/GroupNoticeActivity.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/activity" />
+		<source-file src="src/android/java/activity/ImageGridActivity.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/activity" />
+		<source-file src="src/android/java/activity/RecorderVideoActivity.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/activity" />
+		<source-file src="src/android/java/activity/VideoActivity.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/activity" />
 
 
 		<!--adapter-->
@@ -134,6 +146,9 @@
 		<source-file src="src/android/java/bean/GroupMsg.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/bean" />
 		<source-file src="src/android/java/bean/Groups.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/bean" />
 		<source-file src="src/android/java/bean/Permiss.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/bean" />
+		
+		<source-file src="src/android/java/bean/SwitchVideoModel.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/bean" />
+		<source-file src="src/android/java/bean/VideoEntity.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/bean" />
 
 
 		<!--common-->
@@ -155,21 +170,28 @@
 		<!--fragment-->
 		<source-file src="src/android/java/fragment/OpenRedFragment.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/fragment" />
 		<source-file src="src/android/java/fragment/OpenRpBaseDialogFragment.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/fragment" />
+		<source-file src="src/android/java/fragment/ImageGridFragment.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/fragment" />
 
 		<!--inter-->
 		<source-file src="src/android/java/inter/CPa.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/inter" />
+		<source-file src="src/android/java/inter/RyFileProvider.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/inter" />
 
 		<!--model-->
 		<source-file src="src/android/java/model/RedExtensionModule.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/model" />
 		<source-file src="src/android/java/model/RedGroupEnvelopePlugin.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/model" />
 		<source-file src="src/android/java/model/RpItemModel.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/model" />
 		<source-file src="src/android/java/model/MyExtensionModule.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/model" />
+		<source-file src="src/android/java/model/VideoExtensionModule.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/model" />
+		<source-file src="src/android/java/model/VideoGroupPlugin.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/model" />
 		<!--msg-->
 
 		<source-file src="src/android/java/msg/RedPacketMessage.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/msg" />
 		<source-file src="src/android/java/msg/RedPacketMessageProvider.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/msg" />
 		<source-file src="src/android/java/msg/RedPacketOpenedMessage.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/msg" />
 		<source-file src="src/android/java/msg/RedPacketOpenMessageProvider.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/msg" />
+		<source-file src="src/android/java/msg/VideoMessage.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/msg" />
+		<source-file src="src/android/java/msg/VideoMessageHandler.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/msg" />
+		<source-file src="src/android/java/msg/VideoMessageProvider.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/msg" />
 		<!--receiver-->
 		<source-file src="src/android/java/receiver/SealNotificationReceiver.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/receiver" />
 
@@ -179,27 +201,44 @@
 		<source-file src="src/android/java/retrofit/api/Api.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/retrofit/api" />
 		<source-file src="src/android/java/retrofit/api/RetrofitService.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/retrofit/api" />
 		<source-file src="src/android/java/retrofit/callback/MyCallBack.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/retrofit/callback" />
-
+		<!--video_util-->
+		<source-file src="src/android/java/util/ImageCache.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/video/util" />
+		<source-file src="src/android/java/util/ImageResizer.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/video/util" />
+		<source-file src="src/android/java/util/ImageWorker.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/video/util" />
+		<source-file src="src/android/java/util/OnTransitionListener.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/video/util" />
+		<source-file src="src/android/java/util/RecyclingBitmapDrawable.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/video/util" />
+		<source-file src="src/android/java/util/SampleVideo.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/video/util" />
+		<source-file src="src/android/java/util/Utils.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/video/util" />
+		
+		
 		<!--utils-->
-		<source-file src="src/android/java/utils/BaseDialogFragment.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
-		<source-file src="src/android/java/utils/ColorUtils.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
-		<source-file src="src/android/java/utils/DESUtil.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+
+
+		
 		<source-file src="src/android/java/utils/DialogDisplay.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
 		<source-file src="src/android/java/utils/DrawableUtil.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
-		<source-file src="src/android/java/utils/InputPwdErrorDialogFragment.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/ProgressWheel.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+	
 		<source-file src="src/android/java/utils/KeyboardUtil.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
 		<source-file src="src/android/java/utils/LoadDialog.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
 		<source-file src="src/android/java/utils/LoadingDialog.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
 		<source-file src="src/android/java/utils/LoadingDialogFragment.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
-		<source-file src="src/android/java/utils/MD5.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
-		<source-file src="src/android/java/utils/NetUtils.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		
+
 		<source-file src="src/android/java/utils/NoDoubleClickUtils.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
-		<source-file src="src/android/java/utils/ProgressWheel.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+	
 		<source-file src="src/android/java/utils/RongGenerate.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
 		<source-file src="src/android/java/utils/ScreenUtil.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
 		<source-file src="src/android/java/utils/SharedPreferences.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
 		<source-file src="src/android/java/utils/StringUtil.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
 		<source-file src="src/android/java/utils/ToastUtils.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		
+		<source-file src="src/android/java/utils/DateUtils.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		
+		<source-file src="src/android/java/utils/PathUtil.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/ResourcesUtils.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/TextFormater.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
+		<source-file src="src/android/java/utils/TimeInfo.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/utils" />
 		<!--view-->
 
 		<source-file src="src/android/java/view/ActionBarView.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/view" />
@@ -208,6 +247,7 @@
 		<source-file src="src/android/java/view/NoUnderClickableSpan.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/view" />
 		<source-file src="src/android/java/view/SelectableRoundedImageView.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/view" />
 		<source-file src="src/android/java/view/DialogWithYesOrNoUtils.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/view" />
+		<source-file src="src/android/java/view/RecyclingImageView.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/view" />
 		<source-file src="src/android/java/view/DemoGridView.java" target-dir="src/cordova/plugin/ismartnet/rongcloud/view" />
 
 
@@ -243,8 +283,9 @@
 		<framework src="com.android.support:support-v4:25.3.1" />
 		<framework src="com.github.dingshuangdian:dsdry_no:v1.0.5" />
 		<framework src="com.squareup.picasso:picasso:2.5.2" />
-
-
+		<framework src="com.shuyu:GSYVideoPlayer:2.1.1" />
+		
+	
 
 
 
@@ -272,6 +313,25 @@
 		<source-file src="src/android/res/drawable/selector_btn_top.xml" target-dir="res/drawable" />
 		<source-file src="src/android/res/drawable/rc_progress_round.xml" target-dir="res/drawable" />
 		<source-file src="src/android/res/drawable/selector_btn_back.xml" target-dir="res/drawable" />
+		
+		<source-file src="src/android/res/drawable/ease_common_tab_bg.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/ease_msg_state_failed_resend.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/ease_timestampe_bg.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/em_camera_switch_selector.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/em_photogrid_list_selector.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/jc_click_pause_selector.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/jc_click_play_selector.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/jc_loading.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/jc_seek_progress.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/jc_seek_thumb.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/jc_seek_thumb_normal.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/jc_seek_thumb_pressed.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/rc_video_selector.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/video_new_seekbar_progress.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/video_new_seekbar_thumb.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/video_seek_new_thumb_normal.xml" target-dir="res/drawable" />
+		<source-file src="src/android/res/drawable/video_seek_new_thumb_press.xml" target-dir="res/drawable" />
+	
 
 
 
@@ -317,6 +377,33 @@
 		<source-file src="src/android/res/drawable-xhdpi/success.png" target-dir="res/drawable-xhdpi" />
 		<source-file src="src/android/res/drawable-xhdpi/top_back.png" target-dir="res/drawable-xhdpi" />
 		<source-file src="src/android/res/drawable-xhdpi/default_useravatar.png" target-dir="res/drawable-xhdpi" />
+		
+		<source-file src="src/android/res/drawable-xhdpi/arrow.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ease_chat_video_mask_to.9.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ease_mm_title_back.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ease_msg_state_fail_resend.png" target-dir="res/drawable-xhdpi" />	
+		<source-file src="src/android/res/drawable-xhdpi/ease_msg_state_fail_resend_pressed.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ease_slidetab_bg_press.9.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ease_video_download_btn_nor.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/ease_video_play_btn_small_nor.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/em_actionbar_camera_icon.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/em_camera_switch_normal.9.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/em_camera_switch_pressed.9.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/em_empty_photo.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/em_video_recorder_start_btn.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/em_video_recorder_stop_btn.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/jc_enlarge.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/jc_loading_bg.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/jc_pause_normal.png" target-dir="res/drawable-xhdpi" />
+		
+		<source-file src="src/android/res/drawable-xhdpi/jc_pause_pressed.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/jc_play_normal.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/jc_play_pressed.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/jc_shrink.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/rc_icon_input_video.png" target-dir="res/drawable-xhdpi" />
+		<source-file src="src/android/res/drawable-xhdpi/rc_icon_input_video_pressed.png" target-dir="res/drawable-xhdpi" />
+
+		
 
 
 		<source-file src="src/android/res/anim/slide_left_in.xml" target-dir="res/anim" />
@@ -349,7 +436,23 @@
 		<source-file src="src/android/res/layout/activity_detail_group.xml" target-dir="res/layout" />
 		<source-file src="src/android/res/layout/social_chatsetting_gridview_item.xml" target-dir="res/layout" />
 		<source-file src="src/android/res/layout/dialog_view.xml" target-dir="res/layout" />
+		
+		<source-file src="src/android/res/layout/activity_play.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/activity_play_video.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/ease_commom_back_btn.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/ease_row_sent_video.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/em_choose_griditem.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/em_image_grid_fragment.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/em_recorder_activity.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/sample_video.xml" target-dir="res/layout" />
+		<source-file src="src/android/res/layout/vd_choose_item.xml" target-dir="res/layout" />
+	
+	
+		
+		
+		
 
+		<source-file src="src/android/res/values/em_dimens.xml" target-dir="res/values" />
 		<source-file src="src/android/res/values/attrs.xml" target-dir="res/values" />
 		<source-file src="src/android/res/values/colors.xml" target-dir="res/values" />
 		<source-file src="src/android/res/values/dimens.xml" target-dir="res/values" />

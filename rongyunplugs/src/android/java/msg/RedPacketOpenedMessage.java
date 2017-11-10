@@ -3,14 +3,11 @@ package cordova.plugin.ismartnet.rongcloud.msg;
 import android.os.Parcel;
 import android.text.TextUtils;
 import android.util.Log;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.UnsupportedEncodingException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import io.rong.common.ParcelUtils;
 import io.rong.imlib.MessageTag;
 import io.rong.imlib.model.MessageContent;
@@ -44,13 +41,10 @@ public class RedPacketOpenedMessage extends MessageContent {
     RedPacketOpenedMessage var6 = new RedPacketOpenedMessage();
     //发的人的id;
     var6.setReceiveUserId(var0);
-    Log.e("var0",var0);
     //收的人的名称
     var6.setReceiveUserName(var1);
-    Log.e("var1",var1);
     //发的人的名称
     var6.setSendUserName(var2);
-    Log.e("var2",var2);
     return var6;
   }
 

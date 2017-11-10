@@ -23,7 +23,8 @@ import android.net.Uri;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.guoji.tpco.R;
+import cordova.plugin.ismartnet.rongcloud.utils.ResourcesUtils;
+
 
 /**
  * Created by lvping on 2017/10/11.
@@ -77,21 +78,21 @@ public class SelectableRoundedImageView  extends ImageView {
     super(context, attrs, defStyle);
 
     TypedArray a = context.obtainStyledAttributes(attrs,
-      R.styleable.SelectableRoundedImageView, defStyle, 0);
+      ResourcesUtils.getStyleableArray(context,"SelectableRoundedImageView"), defStyle, 0);
 
-    final int index = a.getInt(R.styleable.SelectableRoundedImageView_android_scaleType, -1);
+    final int index = a.getInt(ResourcesUtils.getStyleable(context,"SelectableRoundedImageView_android_scaleType"), -1);
     if (index >= 0) {
       setScaleType(sScaleTypeArray[index]);
     }
 
     mLeftTopCornerRadius = a.getDimensionPixelSize(
-      R.styleable.SelectableRoundedImageView_sriv_left_top_corner_radius, 0);
+      ResourcesUtils.getStyleable(context,"SelectableRoundedImageView_sriv_left_top_corner_radius"), 0);
     mRightTopCornerRadius = a.getDimensionPixelSize(
-      R.styleable.SelectableRoundedImageView_sriv_right_top_corner_radius, 0);
+      ResourcesUtils.getStyleable(context,"SelectableRoundedImageView_sriv_right_top_corner_radius"), 0);
     mLeftBottomCornerRadius = a.getDimensionPixelSize(
-      R.styleable.SelectableRoundedImageView_sriv_left_bottom_corner_radius, 0);
+      ResourcesUtils.getStyleable(context,"SelectableRoundedImageView_sriv_left_bottom_corner_radius"), 0);
     mRightBottomCornerRadius = a.getDimensionPixelSize(
-      R.styleable.SelectableRoundedImageView_sriv_right_bottom_corner_radius, 0);
+      ResourcesUtils.getStyleable(context,"SelectableRoundedImageView_sriv_right_bottom_corner_radius"), 0);
 
     if (mLeftTopCornerRadius < 0.0f || mRightTopCornerRadius < 0.0f
       || mLeftBottomCornerRadius < 0.0f || mRightBottomCornerRadius < 0.0f) {
@@ -105,17 +106,17 @@ public class SelectableRoundedImageView  extends ImageView {
       mLeftBottomCornerRadius, mLeftBottomCornerRadius
     };
 
-    mBorderWidth = a.getDimensionPixelSize(R.styleable.SelectableRoundedImageView_sriv_border_width, 0);
+    mBorderWidth = a.getDimensionPixelSize(ResourcesUtils.getStyleable(context,"SelectableRoundedImageView_sriv_border_width"), 0);
     if (mBorderWidth < 0) {
       throw new IllegalArgumentException("border width cannot be negative.");
     }
 
-    mBorderColor = a.getColorStateList(R.styleable.SelectableRoundedImageView_sriv_border_color);
+    mBorderColor = a.getColorStateList(ResourcesUtils.getStyleable(context,"SelectableRoundedImageView_sriv_border_color"));
     if (mBorderColor == null) {
       mBorderColor = ColorStateList.valueOf(DEFAULT_BORDER_COLOR);
     }
 
-    isOval = a.getBoolean(R.styleable.SelectableRoundedImageView_sriv_oval, false);
+    isOval = a.getBoolean(ResourcesUtils.getStyleable(context,"SelectableRoundedImageView_sriv_oval"), false);
     a.recycle();
 
     updateDrawable();

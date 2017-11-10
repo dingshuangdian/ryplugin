@@ -7,10 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.guoji.tpco.R;
-
 import java.util.List;
 import cordova.plugin.ismartnet.rongcloud.bean.GroupMsg;
+import cordova.plugin.ismartnet.rongcloud.utils.ResourcesUtils;
 import cordova.plugin.ismartnet.rongcloud.utils.RongGenerate;
 import cordova.plugin.ismartnet.rongcloud.utils.StringUtil;
 /**
@@ -36,10 +35,10 @@ public class GridAdapter extends BaseAdapter{
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
     if (convertView == null) {
-      convertView = LayoutInflater.from(context).inflate(R.layout.social_chatsetting_gridview_item, parent, false);
+      convertView = LayoutInflater.from(context).inflate(ResourcesUtils.getLayoutId(context,"social_chatsetting_gridview_item"),parent, false);
     }
-    SimpleDraweeView iv_avatar = (SimpleDraweeView) convertView.findViewById(R.id.iv_avatar);
-    TextView tv_username = (TextView) convertView.findViewById(R.id.tv_username);
+    SimpleDraweeView iv_avatar = (SimpleDraweeView) convertView.findViewById(ResourcesUtils.getId(context,"iv_avatar"));
+    TextView tv_username = (TextView) convertView.findViewById(ResourcesUtils.getId(context,"tv_username"));
     // 普通成员
       final GroupMsg.ResultBean bean = list.get(position);
         tv_username.setText(bean.getUName());
